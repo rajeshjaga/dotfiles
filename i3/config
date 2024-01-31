@@ -9,7 +9,7 @@ font pango: FiraCode Nerd Font 14
 # desktop entry
 exec --no-startup-id dex --autostart --environment i3  
 # lockscreen if 3 mins sleep
-exec --no-startup-id xautolock -detectsleep -time 3 -locker $lockshortcut 
+#exec --no-startup-id xautolock -detectsleep -time 3 -locker $lockshortcut 
 #exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 

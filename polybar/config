@@ -37,13 +37,15 @@ separator = "|"
 separator-padding = 1
 separator-foreground = ${colors.foreground-alt}
 
-modules-left = bspwm xwindow 
+modules-left = i3 xwindow 
 modules-center = 
 modules-right = backlight wlan pulseaudio battery date powermenu
 
+#tray position and padding is depreciated follow below tray modules
 tray-position = right
 tray-padding = 4
-wm-restack = bspwm
+override-redirrect = true
+wm-restack = i3
 cursor-click = pointer
 cursor-scroll = ns-resize
 
@@ -71,8 +73,8 @@ type = internal/xwindow
 label = %title%
 label-maxlen = 30
 
-[module/bspwm]
-type = internal/bspwm
+[module/i3]
+type = internal/i3
 label-focused = %index%
 label-focused-background = ${colors.foreground}
 ;label-focused-underline= ${colors.primary}
@@ -87,7 +89,7 @@ label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 1
 ; Separator in between workspaces
-; label-separator = |
+ label-separator = |
 
 [module/wlan]
 type = internal/network
@@ -102,8 +104,8 @@ format-disconnected-foreground = #ffffff
 [module/date]
 type = internal/date
 interval = 5
-date = "%d-%m-%Y"
-date-alt = " %Y-%m-%d"
+date = "%d-%m"
+date-alt = "%d-%m"
 time = %H:%M
 time-alt = %H:%M
 format-prefix = ""

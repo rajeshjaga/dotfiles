@@ -1,0 +1,6 @@
+include ~/.config/i3/main.conf
+include ~/.config/i3/keybind.conf
+include ~/.config/i3/window.conf
+include ~/.config/i3/colors.conf
+include ~/.config/i3/bar.conf
+include ~/.config/i3/autostart.conf

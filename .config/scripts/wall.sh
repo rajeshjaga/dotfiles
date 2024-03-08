@@ -1,8 +1,10 @@
 #!/bin/bash
-
+# check if wally folder exists else pulls this stash wallpaper
+# if the folder exists then change the wallpaper randomly
 wallpaper_path="$HOME/.local/asset/wallpaper"
+local_path="$HOME/Pictures/wally"
 fehbg="$HOME/.fehbg"
-fileName="12.png"
+fileName="wall (12).jpg"
 background_link="https://raw.githubusercontent.com/rajeshjaga/wally/master/"
 
 setWallpaper(){
@@ -22,9 +24,15 @@ setWallpaper(){
     fi
 }
 
+setLocalWallpaper(){
+    feh --bg-scale --randomize $local_path/*
+}
+
 if [ -e "$fehbg" ]; then
     $fehbg
     echo "reached feh exited"
+elif [ -d "$local_path" ]; then
+    setLocalWallpaper
 elif [ -d "$wallpaper_path" ]; then
     setWallpaper
 elif [ ! -d "$wallpaper_path" ]; then

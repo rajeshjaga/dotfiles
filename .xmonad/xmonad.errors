@@ -1,0 +1,12 @@
+$ ghc --make xmonad.hs -i -ilib -fforce-recomp -main-is main -dynamic -v0 -outputdir /home/jraj/.xmonad/build-x86_64-linux -o /home/jraj/.xmonad/xmonad-x86_64-linux
+
+xmonad.hs:58:41: error:
+    Not in scope: ‘XMonad.myLayout’
+    Perhaps you meant one of these:
+      data constructor ‘XMonad.Layout’ (imported from XMonad),
+      ‘XMonad.doLayout’ (imported from XMonad),
+      ‘XMonad.setLayout’ (imported from XMonad)
+    Module ‘XMonad’ does not export ‘myLayout’.
+   |
+58 |     , ("M-S-<Space>",       setLayout $ XMonad.myLayout conf)
+   |                                         ^^^^^^^^^^^^^^^

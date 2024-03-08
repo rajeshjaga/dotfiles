@@ -1,3 +1,3 @@
 require('options')
-require('remap')
+require('keybinds')
 

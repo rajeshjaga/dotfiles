@@ -10,8 +10,9 @@ alias g='git'
 alias c='clear'
 alias nv='nvim'
 alias updatemirror='sudo reflector --sort score --save /etc/pacman.d/mirrorlist'
-alias chdotfiles='fd --full-path ~/dotfiles/  -H --exclude .git | fzf-tmux -p --reverse | xargs nvim'
+alias chdotfiles='cd $(fd --full-path ~/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse); nvim'
 alias code='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
+alias chcode='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
 
 
 PS1='\u@\h \W \$ '

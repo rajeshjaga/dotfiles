@@ -20,6 +20,10 @@ PS1='\u@\h \W \$ '
 #[[ ! -z $(which neofetch 2>/dev/null) ]] && neofetch
 [[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch
 
+if [ $(uname -a | awk '{print $2}') == 'VoidLinux' ]; then
+    alias install='sudo xbps-install'
+    alias search='sudo xbps-query -Rs'
+fi
 #[[ ! -e "$HOME/.cargo/env" ]] && "$HOME/.cargo/env"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"

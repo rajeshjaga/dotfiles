@@ -10,6 +10,7 @@
 
     width: 600;
     font: "Fira Code Nerd Font 14";
+    font: "Font Awesome 6 Solid";
 }
 
 element-text, element-icon , mode-switcher {

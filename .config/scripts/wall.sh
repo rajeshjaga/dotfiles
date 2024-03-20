@@ -4,20 +4,20 @@
 wallpaper_path="$HOME/.local/asset/wallpaper"
 local_path="$HOME/Pictures/wally"
 fehbg="$HOME/.fehbg"
-fileName="wall (12).jpg"
+fileName="wall_144.png"
 background_link="https://raw.githubusercontent.com/rajeshjaga/wally/master/"
 
 setWallpaper(){
     if [ -e "$wallpaper_path/$fileName" ];then
-        feh --bg-scale "$wallpaper_path/$fileName"
+        feh --bg-scale "$wallpaper_path/$fileName" --no-fehbg
         echo "wallpaper has been set using feh!"
     elif [ "$PWD" == "$wallpaper_path" ];then
         if [ -n "$(which wget 2> /dev/null)" ]; then
             wget "$background_link/$fileName" 2> /dev/null
-            feh --bg-scale "$wallpaper_path/$fileName"
+            feh --bg-scale "$wallpaper_path/$fileName" --no-fehbg
         elif [ -n "$(which curl 2> /dev/null)" ]; then
             curl -O  "$background_link/$fileName" 2> /dev/null
-            feh --bg-scale "$wallpaper_path/$fileName"
+            feh --bg-scale "$wallpaper_path/$fileName" --no-fehbg
         fi
     else
         echo "suit yourself a good wallpaper"
@@ -25,7 +25,7 @@ setWallpaper(){
 }
 
 setLocalWallpaper(){
-    feh --bg-scale --randomize $local_path/*
+    feh --bg-scale --randomize $local_path/* --no-fehbg
 }
 
 if [ -e "$fehbg" ]; then

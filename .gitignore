@@ -1,3 +1,4 @@
 .local/state
 .local/share
 .local/asset
+*lock.json

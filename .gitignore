@@ -1,4 +1,4 @@
 .local/state
 .local/share
 .local/asset
-*lock.json
+.config/nvim/lazy-lock.json

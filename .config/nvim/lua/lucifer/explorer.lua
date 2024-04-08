@@ -9,6 +9,8 @@ return {
     },
     config = function()
         require("neo-tree").setup({
+            enable_git_status = true,
+            enable_diagnostics = true,
             filesystem = {
                 filtered_items = {
                     visible = true,
@@ -19,10 +21,11 @@ return {
             },
             window = {
                 width = 30,
+                position = "right",
             },
         })
-        vim.keymap.set("n", "<C-N>", ":Neotree filesystem reveal left<CR>", {})
+        vim.keymap.set("n", "<C-N>", ":Neotree filesystem reveal right<CR>", {})
         vim.keymap.set("n", "<C-E>", ":Neotree toggle<CR>", {})
-        vim.keymap.set("n", "<C-S-e>", ":Neotree close<CR>", {})
+        -- vim.keymap.set("n", "<C-S-E>", ":Neotree close<CR>", {})
     end
 }

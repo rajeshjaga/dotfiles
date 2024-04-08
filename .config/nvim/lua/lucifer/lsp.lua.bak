@@ -37,15 +37,6 @@ return {
             },
         })
 
-        -- vim.api.nvim_create_autocmd({"CursorHold", "CursorHoldI"}, {
-        --     buffer = event.buf,
-        --     callback = vim.lsp.buf.document_highlight,
-        -- })
-        --
-        -- vim.api.nvim_create_autocmd({"CursorMoved", "CursorMovedI"}, {
-        --     buffer = event.buf,
-        --     callback = vim.lsp.buf.clear_references,
-        -- })
         local cmp = require('cmp')
         local cmp_action = require('lsp-zero').cmp_action()
         vim.keymap.set("n", "<leader>s", vim.lsp.buf.format, { desc = "Format the current buffer" })

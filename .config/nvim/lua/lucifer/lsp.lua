@@ -1,20 +1,21 @@
-return{
+return {
     "neovim/nvim-lspconfig",
-    dependencies={
+    dependencies = {
         'williamboman/mason.nvim',
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
-        {'j-hui/fidget.nvim', opts={}},
-        {'folke/neodev.nvim', opts={}},
-        'hrsh7th/nvim-cmp'
+        { 'j-hui/fidget.nvim', opts = {} },
+        { 'folke/neodev.nvim', opts = {} },
+        'hrsh7th/nvim-cmp',
+        'mfussenegger/nvim-lint',
     },
     config = function()
-        local tBuiltins=require('telescope.builtin')
-        vim.api.nvim_create_autocmd('LspAttach',{
+        local tBuiltins = require('telescope.builtin')
+        vim.api.nvim_create_autocmd('LspAttach', {
             group = vim.api.nvim_create_augroup('lucifer-lsp-attach', { clear = true }),
             callback = function(event)
                 local map = function(keymaps, func, desc)
-                    vim.keymap.set('n', keymaps, func, {buffer=event.buf, desc='LSP: ' .. desc })
+                    vim.keymap.set('n', keymaps, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                 end
 
                 map("gI", tBuiltins.lsp_implementations, '[g]oto [I]mplementation')
@@ -26,17 +27,17 @@ return{
 
                 map("gD", vim.lsp.buf.declaration, '[G]oto [D]eclaration')
                 map("<leader>s", vim.lsp.buf.format, '[f]ormat buffer')
-                map("K", vim.lsp.buf.hover , "Hover on the word")
-                map("<leader>r", vim.lsp.buf.rename , "Rename the variable under Cursor")
+                map("K", vim.lsp.buf.hover, "Hover on the word")
+                map("<leader>r", vim.lsp.buf.rename, "Rename the variable under Cursor")
                 map("<leader>ca", vim.lsp.buf.code_action, '[c]ode [a]ctions')
 
                 local client = vim.lsp.get_client_by_id(event.data.client_id)
                 if client and client.server_capabilities.documentHighlightProvider then
-                    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHold'}, {
+                    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHold' }, {
                         buffer = event.buf,
                         callback = vim.lsp.buf.document_highlight,
                     })
-                    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMoved'}, {
+                    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMoved' }, {
                         buffer = event.buf,
                         callback = vim.lsp.buf.clear_references,
                     })
@@ -47,29 +48,39 @@ return{
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-        local servers={
+        local servers = {
             lua_ls = {
                 settings = {
                     Lua = {
-                        completion= {
+                        completion = {
                             callSnippet = 'Replace'
                         }
                     }
                 }
             },
-            rust_analyzer={},
-            clangd={},
-            tsserver={},
+            rust_analyzer = {},
+            clangd = {},
+            tsserver = {},
+            tailwindcss = {},
+            prettier = {},
+            isort = {},
+            pyright = {},
+            black = {},
+            gopls = {},
+            goimports = {},
+            bashls = {},
+            beautysh = {},
         }
         require('mason').setup()
-        local ensure_installed = vim.tbl_keys(severs or {})
+        local ensure_installed = vim.tbl_keys(servers or {})
         vim.list_extend(ensure_installed, {
             'stylua',
         })
-        require('mason-tool-installer').setup{ ensure_installed = ensure_installed }
-        require('mason-lspconfig').setup{
-            handlers={
-                function(server_name) 
+        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+        require('mason-lspconfig').setup {
+            automatic_installation = true,
+            handlers = {
+                function(server_name)
                     local server = servers[server_name] or {}
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
                     require('lspconfig')[server_name].setup(server)

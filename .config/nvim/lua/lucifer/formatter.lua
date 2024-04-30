@@ -17,6 +17,7 @@ return {
             formatters_by_fts = {
                 javascript = { "prettier" },
                 typescript = { "prettier" },
+                html = { "prettier" },
                 lua = { "stylua" },
                 python = { "black", "isort" },
                 bash = { "beautysh" },

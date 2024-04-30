@@ -22,6 +22,9 @@ return {
             window = {
                 width = 30,
                 position = "right",
+                mapping = {
+                    ["T"] = "open"
+                }
             },
         })
         vim.keymap.set("n", "<C-N>", ":Neotree filesystem reveal right<CR>", {})

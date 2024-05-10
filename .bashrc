@@ -29,7 +29,7 @@ if [ ! -z $(which pacman  2>/dev/null) ]; then
     alias updatemirror='sudo reflector --sort score --save /etc/pacman.d/mirrorlist'
 fi
 
-[[ ! -e "$HOME/.cargo/env" ]] && "$HOME/.cargo/env"
+#[[ ! -e "$HOME/.cargo/env" ]] && "$HOME/.cargo/env"
 
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm

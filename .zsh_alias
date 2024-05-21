@@ -1,0 +1,28 @@
+alias ls=exa
+alias la='\usr\bin\ls -la'
+alias ll='exa -lah'
+alias l='exa -l'
+alias vim=nvim
+alias g=git
+alias t=tmux
+alias c='clear'
+alias nv='nvim'
+alias chdotfiles='nvim $(fd --full-path ~/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
+alias code='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
+alias chcode='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+
+if [ "$( which pacman 2> /dev/null)" ]; then
+        alias updatemirror='sudo reflector --sort score --country IN --save /etc/pacman.d/mirrorlist; sudo pacman -Sy'
+        if [ "$( which yay 2> /dev/null)" ]; then
+                alias update='yay -Syu'
+        elif [ "$( which paru 2> /dev/null)" ]; then
+                alias update='paru -Syu'
+        else
+                alias update='sudo pacman -Syu'
+        fi
+fi
+
+if [ "$( which fd 2>/dev/null )" ]; then 
+        if [ "$( which fzf 2>/dev/null )" ]; then 
+fi
+fi

@@ -37,3 +37,4 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
 export EDITOR=nvim
+. "$HOME/.cargo/env"

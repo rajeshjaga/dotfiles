@@ -1,0 +1,48 @@
+#window {
+	margin: 5px;
+        background-color: #313244;
+        border-radius: 8pt;
+        font-family: 'JetBrains Mono','FiraCode';
+        font-size: 16px;
+        padding: 10px 5px;
+}
+#input {
+	margin: 5px;
+}
+
+#inner-box {
+	border-radius: 3px 3px 3px 3px;
+	background-color: #1e1e2e;
+	border 1px solid #f5e0dc;
+}
+
+#outer-box {
+	margin: 5px;
+        border-radius:5px;
+}
+
+#input {
+  border: 2px solid #94e2d5;
+  background-color: #11111b;
+  color: #cdd6f4;
+  padding: 3px 5px 3px 5px;
+  border-radius: 5px;
+}
+
+
+#scroll {
+        margin-top: 10px;
+        background-color: transparent;
+        border: none;
+}
+
+#text {
+	margin: 5px;
+	color: #cdd6f4;
+        padding: 3px;
+} 
+
+#img{
+        background-color: transparent;
+        padding: 5px;
+}

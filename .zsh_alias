@@ -10,6 +10,7 @@ alias nv='nvim'
 alias chdotfiles='nvim $(fd --full-path ~/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
 alias code='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
 alias chcode='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+#alias ='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
 
 if [ "$( which pacman 2> /dev/null)" ]; then
         alias updatemirror='sudo reflector --sort score --country IN --save /etc/pacman.d/mirrorlist; sudo pacman -Sy'

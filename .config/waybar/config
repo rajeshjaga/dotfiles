@@ -45,6 +45,8 @@
             // "device": "acpi_video1",
             "format": "{icon} {percent}%",
             "format-icons": ["", "", "", "", "", "", "", "", ""]
+        //    "on-scroll-up": "$HOME/dotfiles/.config/scripts/brightness up",
+         //   "on-scroll-down": "$HOME/dotfiles/.config/scripts/brightness dow:"
         },
         "battery": {
             "states": {

@@ -1,6 +1,9 @@
 configuration{
     modi: "run,drun,window";
     icon-theme: "Papirus-Icon-Theme";
+    font-family: "Fira Code";
+    font-family: "Roboto";
+    font-family: "Font Awesome";
     show-icons: true;
     terminal: "alacritty";
     drun-display-format: "{icon} {name}";

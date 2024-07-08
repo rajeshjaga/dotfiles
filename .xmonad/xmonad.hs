@@ -10,6 +10,8 @@ import XMonad.Util.EZConfig(additionalKeysP)
 import XMonad.Util.Loggers
 import XMonad.Layout.ThreeColumns
 import XMonad.Hooks.EwmhDesktops
+import XMonad.ManageHook
+import XMonad.Hooks.ManageHelpers
 
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.StatusBar
@@ -70,7 +72,11 @@ myXmobarPP :: PP
 myXmobarPP = def
     { ppSep             = magenta " | ",
       ppTitleSanitize   = xmobarStrip,
+<<<<<<< HEAD
       ppCurrent         = wrap " " "" . xmobarBorder "Top" "#181825" 2,
+=======
+      ppCurrent         = wrap " " "" . xmobarBorder "Bottom" "#94e2d5" 3,
+>>>>>>> d24021c (good xmonad and xmobar config)
       ppHidden          = white . wrap " " "",
       ppHiddenNoWindows = lowWhite . wrap " " "",
       ppUrgent          = red . wrap (yellow "!") (yellow "!"),
@@ -90,7 +96,11 @@ myXmobarPP = def
       white     = xmobarColor "#cdd6f4" ""
       yellow    = xmobarColor "#f9e2af" ""
       red       = xmobarColor "#f38ba8" ""
+<<<<<<< HEAD
       lowWhite  = xmobarColor "#bac2de" ""
+=======
+      lowWhite  = xmobarColor "#45475a" ""
+>>>>>>> d24021c (good xmonad and xmobar config)
 
 
 -- layouts
@@ -106,14 +116,34 @@ myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol
 -- startup apps
 myStartupHook :: X ()
 myStartupHook = do
+<<<<<<< HEAD
   spawnOnce "$HOME/.config/scripts/wall.sh"
   spawnOnce "dunst -c ~/.config/dunst/dunstrc"
+=======
+  spawnOnce "$HOME/dotfiles/.config/scripts/wall.sh"
+  spawnOnce "dunst -c $HOME/dotfiles/.config/dunst/dunstrc -startup_notification"
+>>>>>>> d24021c (good xmonad and xmobar config)
   spawnOnce "nm-applet"
   spawnOnce "picom -f -i -m=1.0 -r 0 -c -i 0.7 -l 0 -t 0 -b"
   spawnOnce "lxsession --session=xmonadwm --de=xmonad & "
   spawnOnce "nwg-look -a"
+<<<<<<< HEAD
 
 
+=======
+  spawnOnce "trayer --edge top --align right --SetDockType true \
+            \--SetPartialStrut true --expand true --width 10 \
+            \--transparent true --tint 0x1e1e2e --height 32"
+
+myManageHook :: ManageHook
+myManageHook = (composeAll
+                        [ className =? "Gimp"         --> doFloat,
+                        className =? "firefox"      --> doShift "2",
+                        className =? "kitty"      --> doShift "1",
+                        className =? "alacritty"      --> doShift "1",
+                        isDialog                    --> doFloat
+                        ])
+>>>>>>> d24021c (good xmonad and xmobar config)
 
 myconfig = def
     { modMask                   = myModMask,
@@ -121,7 +151,12 @@ myconfig = def
       startupHook               = myStartupHook,
       borderWidth               = myBorderWidth,
       focusedBorderColor        = myFocusBorderColor,
+<<<<<<< HEAD
       normalBorderColor         = myNormalBorderColor
+=======
+      normalBorderColor         = myNormalBorderColor,
+      manageHook                = myManageHook
+>>>>>>> d24021c (good xmonad and xmobar config)
     }
     `additionalKeysP`
     [ ("M-<Return>",        spawn myTerminal)
@@ -132,7 +167,7 @@ myconfig = def
     , ("M-b",               spawn mybrowser)
     , ("M-S-c",             kill)
     , ("M-n",               refresh)
-    , ("M-S-r",             io exitSuccess)
+    , ("M-S-q",             io exitSuccess)
     , ("M-r",               spawn "xmonad --recompile && xmonad --restart")
     , ("M-<Space>",         sendMessage NextLayout)
     ]
@@ -141,5 +176,9 @@ main :: IO ()
 main = xmonad 
       . ewmhFullscreen
       . ewmh
+<<<<<<< HEAD
       . withEasySB (statusBarProp "xmobar ~/dotfiles/.xmobarr" (pure myXmobarPP)) toggleStructsKey
+=======
+      . withEasySB (statusBarProp "xmobar $HOME/dotfiles/.xmobarrc" (pure myXmobarPP)) toggleStructsKey
+>>>>>>> d24021c (good xmonad and xmobar config)
       $ myconfig

@@ -31,6 +31,7 @@ fi
 
 
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
+export PATH=$PATH:$HOME/.config/emacs/bin
 export EDITOR=nvim
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 
@@ -39,6 +40,16 @@ if [ ! -d $NVM_DIR ]; then
 else
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+<<<<<<< HEAD
+fi
+
+
+if [ ! -f  "$HOME/.cargo/env" ]; then 
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else 
+    . "$HOME/.cargo/env"
+=======
+>>>>>>> d24021c (good xmonad and xmobar config)
 fi
 
 
@@ -47,3 +58,5 @@ if [ ! -f  "$HOME/.cargo/env" ]; then
 else 
     . "$HOME/.cargo/env"
 fi
+
+[ -f "/home/jraj/.ghcup/env" ] && . "/home/jraj/.ghcup/env" # ghcup-env

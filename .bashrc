@@ -49,8 +49,9 @@ else
     . "$HOME/.cargo/env"
 fi
 
-if [ ! -f  "$HOME/.cargo/env" ]; then 
+if [ ! -f  "$HOME/.ghcup/env" ]; then 
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 else
-    [ -f "/home/jraj/.ghcup/env" ] && . "/home/jraj/.ghcup/env" # ghcup-env
+     . "/home/jraj/.ghcup/env" # ghcup-env
 fi
+

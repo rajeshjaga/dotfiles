@@ -3,8 +3,3 @@
 .local/asset
 .config/nvim/lazy-lock.json
 .config/nvim
-st
-dwm
-dmenu
-scroll
-dwmstatus

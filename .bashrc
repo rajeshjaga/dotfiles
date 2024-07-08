@@ -40,16 +40,6 @@ if [ ! -d $NVM_DIR ]; then
 else
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-<<<<<<< HEAD
-fi
-
-
-if [ ! -f  "$HOME/.cargo/env" ]; then 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-else 
-    . "$HOME/.cargo/env"
-=======
->>>>>>> d24021c (good xmonad and xmobar config)
 fi
 
 
@@ -59,4 +49,8 @@ else
     . "$HOME/.cargo/env"
 fi
 
-[ -f "/home/jraj/.ghcup/env" ] && . "/home/jraj/.ghcup/env" # ghcup-env
+if [ ! -f  "$HOME/.cargo/env" ]; then 
+    curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
+else
+    [ -f "/home/jraj/.ghcup/env" ] && . "/home/jraj/.ghcup/env" # ghcup-env
+fi

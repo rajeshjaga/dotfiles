@@ -154,5 +154,5 @@ main :: IO ()
 main = xmonad 
       . ewmhFullscreen
       . ewmh
-      . withEasySB (statusBarProp "xmobar ~/dotfiles/.xmobarr" (pure myXmobarPP)) toggleStructsKey
+      . withEasySB (statusBarProp "xmobar ~/dotfiles/.xmobarrc" (pure myXmobarPP)) toggleStructsKey
       $ myconfig

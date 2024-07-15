@@ -52,7 +52,11 @@ fi
 if [ ! -f  "$HOME/.ghcup/env" ]; then 
     curl --proto '=https' --tlsv1.2 -sSf https://get-ghcup.haskell.org | sh
 else
+<<<<<<< Updated upstream
 [ -f "/home/lucifer/.ghcup/env" ] && . "/home/lucifer/.ghcup/env" # ghcup-env
+=======
+    . "/home/lucifer/.ghcup/env" # ghcup-env
+>>>>>>> Stashed changes
 fi
 
 

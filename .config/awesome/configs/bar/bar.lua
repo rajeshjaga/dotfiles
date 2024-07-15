@@ -1,5 +1,6 @@
 local awful = require("awful")
 local wibox = require("wibox")
+local gears = require("gears")
 local screen = screen
 local client = client
 local modkey = "Mod4"
@@ -10,31 +11,33 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.mylayoutbox = awful.widget.layoutbox {
         screen  = s,
         buttons = {
-            awful.button({ }, 1, function () awful.layout.inc( 1) end),
-            awful.button({ }, 3, function () awful.layout.inc(-1) end),
-            awful.button({ }, 4, function () awful.layout.inc(-1) end),
-            awful.button({ }, 5, function () awful.layout.inc( 1) end),
+            awful.button({}, 1, function() awful.layout.inc(1) end),
+            awful.button({}, 3, function() awful.layout.inc(-1) end),
+            awful.button({}, 4, function() awful.layout.inc(-1) end),
+            awful.button({}, 5, function() awful.layout.inc(1) end),
         }
     }
+
+    s.mypromptbox = awful.widget.prompt()
 
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
         buttons = {
-            awful.button({ }, 1, function(t) t:view_only() end),
+            awful.button({}, 1, function(t) t:view_only() end),
             awful.button({ modkey }, 1, function(t)
-                                            if client.focus then
-                                                client.focus:move_to_tag(t)
-                                            end
-                                        end),
-            awful.button({ }, 3, awful.tag.viewtoggle),
+                if client.focus then
+                    client.focus:move_to_tag(t)
+                end
+            end),
+            awful.button({}, 3, awful.tag.viewtoggle),
             awful.button({ modkey }, 3, function(t)
-                                            if client.focus then
-                                                client.focus:toggle_tag(t)
-                                            end
-                                        end),
-            awful.button({ }, 4, function(t) awful.tag.viewprev(t.screen) end),
-            awful.button({ }, 5, function(t) awful.tag.viewnext(t.screen) end),
+                if client.focus then
+                    client.focus:toggle_tag(t)
+                end
+            end),
+            awful.button({}, 4, function(t) awful.tag.viewprev(t.screen) end),
+            awful.button({}, 5, function(t) awful.tag.viewnext(t.screen) end),
         }
     }
 
@@ -42,13 +45,11 @@ screen.connect_signal("request::desktop_decoration", function(s)
     s.mytasklist = awful.widget.tasklist {
         screen  = s,
         filter  = awful.widget.tasklist.filter.currenttags,
-        buttons = {
-            awful.button({ }, 1, function (c)
-                c:activate { context = "tasklist", action = "toggle_minimization" }
-            end),
-            awful.button({ }, 3, function() awful.menu.client_list { theme = { width = 250 } } end),
-            awful.button({ }, 4, function() awful.client.focus.byidx(-1) end),
-            awful.button({ }, 5, function() awful.client.focus.byidx( 1) end),
+        buttons = tasklist_buttons,
+        style   = {
+            shape_border_width = 1,
+            shape_border_color = "#4545ee",
+            shape = gears.shape.bar
         }
     }
 
@@ -65,9 +66,9 @@ screen.connect_signal("request::desktop_decoration", function(s)
                 s.mytaglist,
             },
             s.mytasklist, -- Middle widget
-            { -- Right widgets
+            {             -- Right widgets
                 layout = wibox.layout.fixed.horizontal,
-  --              mykeyboardlayout,
+                --              mykeyboardlayout,
                 s.mylayoutbox,
                 wibox.widget.systray(),
                 mytextclock,
@@ -76,3 +77,15 @@ screen.connect_signal("request::desktop_decoration", function(s)
     }
 end)
 
+awful.keyboard.append_global_keybindings({
+    awful.key({ modkey }, "x",
+        function()
+            awful.prompt.run {
+                prompt       = "Run Lua code: ",
+                textbox      = awful.screen.focused().mypromptbox.widget,
+                exe_callback = awful.util.eval,
+                history_path = awful.util.get_cache_dir() .. "/history_eval"
+            }
+        end,
+        { description = "lua execute prompt", group = "awesome" }),
+})

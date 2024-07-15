@@ -1,30 +1,48 @@
-import Control.Monad.RWS (Monoid (mempty))
+-- mapping lib
 import Data.IntMap qualified as M
 import Data.Map
 import Data.Map qualified as Map
+-- mayber data type
 import Data.Maybe (fromJust)
 import Data.Tree
 import Distribution.Simple (UserHooks (hookedPrograms))
 import GHC.Version (cProjectVersion)
+-- system exit
 import System.Exit
+-- IO Lib
+import System.IO
+-- main libs intialize
 import XMonad
+-- log
 import XMonad.Hooks.DynamicLog
+-- window management
 import XMonad.Hooks.EwmhDesktops
+-- Status bar
+import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+-- layouts
+import XMonad.Layout
 import XMonad.Layout.Accordion
 import XMonad.Layout.NoBorders
 import XMonad.Layout.Tabbed
 import XMonad.Layout.ThreeColumns
+-- hooks
 import XMonad.ManageHook
+-- ungrab lib
+import XMonad.Operations (unGrab)
+-- utils
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers
+-- runners lib
+import XMonad.Util.Run (spawnPipe)
 import XMonad.Util.SpawnOnce
 
 -- import XMonad.Util.ClickableWorkspaces
 
 -- modkey
+myModMask :: KeyMask
 myModMask = mod4Mask
 
 -- Launcher Menu
@@ -41,7 +59,7 @@ workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- file explorer
 myFileExplorer, myFileExplorerAlt :: String
-myFileExplorer = "kitty -e ranger"
+myFileExplorer = "$HOME/dotfiles/.config/scripts/kitty.sh ranger"
 myFileExplorerAlt = "pcmanfm"
 
 -- my default browser
@@ -49,8 +67,9 @@ mybrowser :: String
 mybrowser = "firefox"
 
 -- my default terminal
-myTerminal :: String
-myTerminal = "kitty"
+myTerminal, myTerminalAlt :: String
+myTerminal = "$HOME/dotfiles/.config/scripts/kitty.sh"
+myTerminalAlt = "$HOME/.config/scripts/alacritty.sh"
 
 -- colors of window borders
 myNormalBorderColor, myFocusBorderColor :: String
@@ -61,12 +80,16 @@ myFocusBorderColor = "#b4befe"
 myBorderWidth :: Dimension
 myBorderWidth = 3
 
+myFocusFollowMouse :: Bool
+myFocusFollowMouse = True
+
 -- toggle key to override xmobar
 toggleStructsKey :: XConfig Layout -> (KeyMask, KeySym)
 toggleStructsKey XConfig {modMask = m} = (m .|. shiftMask, xK_i)
 
 myKeys =
   [ ("M-<Return>", spawn myTerminal),
+    ("M-S-<Return>", spawn myTerminalAlt),
     ("M-d", spawn myLauncher),
     ("M-p", spawn myLauncherAlt),
     ("M-e", spawn myFileExplorer),
@@ -75,9 +98,17 @@ myKeys =
     ("M-S-c", kill),
     ("M-n", refresh),
     ("M-S-q", io exitSuccess),
-    ("M-r", spawn "xmonad --recompile && xmonad --restart"),
+    ("M-q", spawn "xmonad --recompile && xmonad --restart"),
     ("M-<Space>", sendMessage NextLayout),
-    ("M-S-<Return>", spawn "$HOME/.config/scripts/alacritty.sh")
+    ("M-S-o", spawn "$HOME/.config/scripts/wall.sh"),
+    ("M-S-m", spawn "xrandr --output HDMI-1-0 --mode 1920x1080 --rate 119.98 --right-of eDP1"),
+    ("<XF86AudioRaiseVolume>", spawn "~/dotfiles/.config/scripts/volume.sh -u"),
+    ("<XF86AudioLowerVolume>", spawn "~/dotfiles/.config/scripts/volume.sh -d"),
+    ("<XF86AudioMute>", spawn "~/dotfiles/.config/scripts/volume.sh -m"),
+    ("<XF86MonBrightnessUp>", spawn "~/dotfiles/.config/scripts/brightness up"),
+    ("<XF86MonBrightnessDown>", spawn "~/dotfiles/.config/scripts/brightness down"),
+    ("M-<Up>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness up"),
+    ("M-<Down>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness down")
     -- ("M-h", focus left),
     -- ("M-l", focus right),
     -- ("M-j", focus down),
@@ -122,7 +153,7 @@ myXmobarPP =
 myEventHook = mempty
 
 -- layouts
-myLayout = tiled ||| Mirror tiled ||| Full ||| threeCol ||| noBorders (tabbed shrinkText def) ||| Accordion
+myLayoutHook = tiled ||| Mirror tiled ||| Full ||| threeCol
   where
     threeCol = ThreeColMid nmaster delta ratio
     tiled = Tall nmaster delta ratio
@@ -139,11 +170,10 @@ myStartupHook = do
   spawnOnce "picom -f -i -m=1.0 -r 0 -c -i 0.7 -l 0 -t 0 -b"
   spawnOnce "lxsession --session=xmonadwm --de=xmonad & "
   spawnOnce "nwg-look -a"
-
--- spawnOnce
---   "trayer --edge top --align right --SetDockType true \
---   \--SetPartialStrut true --expand true --width 10 \
---   \--transparent true --tint 0x1e1e2e --height 32"
+  spawnOnce
+    "trayer --edge top --align right --SetDockType true \
+    \--SetPartialStrut true --expand true --width 10 \
+    \--transparent true --tint 0x1e1e2e --height 32"
 
 myManageHook :: ManageHook
 myManageHook =
@@ -159,13 +189,14 @@ myManageHook =
 myconfig =
   def
     { modMask = myModMask,
-      layoutHook = myLayout,
+      layoutHook = avoidStruts $ myLayoutHook,
       startupHook = myStartupHook,
       borderWidth = myBorderWidth,
       focusedBorderColor = myFocusBorderColor,
       normalBorderColor = myNormalBorderColor,
-      manageHook = myManageHook,
-      handleEventHook = myEventHook
+      manageHook = manageDocks <+> myManageHook,
+      handleEventHook = myEventHook,
+      focusFollowsMouse = myFocusFollowMouse
     }
     `additionalKeysP` myKeys
 

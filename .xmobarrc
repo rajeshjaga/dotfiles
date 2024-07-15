@@ -2,7 +2,7 @@ Config { overrideRedirect = False
        , font     = "xft:JetBrainsMonoNerdFont-13"
        , bgColor  = "#1e1e2e"
        , fgColor  = "#cdd6f4"
-       , position = TopH 32
+       , position = TopSize L 100 32
        , commands = [ Run Cpu
                         [ "-L", "3"
                         , "-H", "50"
@@ -15,6 +15,21 @@ Config { overrideRedirect = False
                         , "--"
                         , "--on", ""
                         ]
+                    , Run Battery ["--template" , "Batt: <acstatus>"
+                             , "--Low"      , "10"        -- units: %
+                             , "--High"     , "80"        -- units: %
+                             , "--low"      , "darkred"
+                             , "--normal"   , "darkorange"
+                             , "--high"     , "darkgreen"
+
+                             , "--" -- battery specific options
+                                       -- discharging status
+                                       , "-o"	, "<left>% (<timeleft>)"
+                                       -- AC "on" status
+                                       , "-O"	, "<fc=#dAA520>Charging</fc>"
+                                       -- charged status
+                                       , "-i"	, "<fc=#006000>Charged</fc>"
+                             ] 50
                     , Run Memory ["--template", "Mem: <usedratio>%"] 10
                     , Run Swap [] 10
                     , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
@@ -22,6 +37,6 @@ Config { overrideRedirect = False
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %alsa:default:Master% | %cpu% | %memory% * %swap% | %date% "
+       , template = "%XMonadLog% }{ %battery% | %alsa:default:Master% | %cpu% | %memory% * %swap% | %date% "
        }
 

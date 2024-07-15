@@ -12,12 +12,12 @@ ruled.client.append_rule {
             "Tor Browser", "Wpa_gui", "veromix", "xtightvncviewer",
         },
         name     = {
-            "Event Tester",     -- xev.
+            "Event Tester", -- xev.
         },
         role     = {
-            "AlarmWindow",       -- Thunderbird's calendar.
-            "ConfigManager",     -- Thunderbird's about:config.
-            "pop-up",            -- e.g. Google Chrome's (detached) Developer Tools.
+            "AlarmWindow",   -- Thunderbird's calendar.
+            "ConfigManager", -- Thunderbird's about:config.
+            "pop-up",        -- e.g. Google Chrome's (detached) Developer Tools.
         }
     },
     properties = { floating = true }
@@ -31,7 +31,7 @@ ruled.client.append_rule {
 
 ruled.client.append_rule {
     rule       = { class = "Alacritty" },
-    properties = { screen = 1, tag = "1" }
+    properties = { screen = 0, tag = "1" }
 }
 ruled.client.append_rule {
     rule       = { class = "firefox" },
@@ -42,8 +42,8 @@ ruled.client.append_rule {
     rule       = { class = "Pavucontrol" },
     properties = {
         floating = true,
--- placement = awful.placement.centered,
-        width     = 640,
-        height    = 480,
+        -- placement = awful.placement.centered,
+        width    = 640,
+        height   = 480,
     }
 }

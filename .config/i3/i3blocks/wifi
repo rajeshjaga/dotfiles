@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+wifi=$(iw dev | grep ssid | cut -d " " -f 2-)
+
+if [ -z "$wifi" ]; then
+    echo "Wifi: $wifi"
+else
+    if [ -z "$(ping -c 1.1.1.1 2>/dev/null)" ]; then
+        dunstify "internet is up"
+        echo "IP: $(ip a | grep inet)"
+    else
+        dunstify "internet is down"
+    fi
+fi

@@ -3,15 +3,40 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+export PATH=$PATH:$HOME/dotfiles/.config/scripts
+export PATH=$PATH:$HOME/.config/emacs/bin
+export PATH=$PATH:$HOME/Clone/lua-language-server/bin
+export PATH=$PATH:$HOME/.local/bin/
+export EDITOR=nvim
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+
+if [ ! -d $NVM_DIR ]; then 
+    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh" | bash
+else
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
+
+if [ ! -f  "$HOME/.cargo/env" ]; then 
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+else 
+    . "$HOME/.cargo/env"
+fi
+
 alias ls='exa'
 alias ll='exa -lah'
 alias t='tmux'
 alias g='git'
 alias c='clear'
 alias nv='nvim'
-alias chdotfiles='nvim $(fd --full-path ~/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
-alias code='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
-alias chcode='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+alias vim='nvim'
+alias chdotfiles='nvim $(fd --full-path $HOME/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
+alias code='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
+alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+alias vscode='/usr/bin/code'
+alias gcl='git clone '
+alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo | xargs bash -c"
 
 
 PS1='\u@\h \W \$ '
@@ -28,23 +53,8 @@ if [ ! -z $(which pacman  2>/dev/null) ]; then
     alias search='sudo pacman -Ss'
     alias updatemirror='sudo reflector --sort score --save /etc/pacman.d/mirrorlist'
 fi
-
-
-export PATH=$PATH:$HOME/dotfiles/.config/scripts
-export PATH=$PATH:$HOME/.config/emacs/bin
-export EDITOR=nvim
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-if [ ! -d $NVM_DIR ]; then 
-    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh" | bash
-else
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
-
-
-if [ ! -f  "$HOME/.cargo/env" ]; then 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-else 
-    . "$HOME/.cargo/env"
+if [ ! -z $(which apt  2>/dev/null) ]; then
+    alias install='sudo apt install '
+    alias update='sudo apt update &&'
+    alias listupgrade='sudo apt list --upgradable'
 fi

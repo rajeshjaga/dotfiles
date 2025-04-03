@@ -59,7 +59,7 @@ workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- file explorer
 myFileExplorer, myFileExplorerAlt :: String
-myFileExplorer = "$HOME/dotfiles/.config/scripts/kitty.sh ranger"
+myFileExplorer = "kitty -c ranger"
 myFileExplorerAlt = "pcmanfm"
 
 -- my default browser

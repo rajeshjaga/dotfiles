@@ -6,7 +6,6 @@
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
 export PATH=$PATH:$HOME/.config/emacs/bin
 export PATH=$PATH:$HOME/Clone/lua-language-server/bin
-export PATH=$PATH:$HOME/.local/bin/
 export EDITOR=nvim
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 

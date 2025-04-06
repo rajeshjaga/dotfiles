@@ -5,8 +5,6 @@ import Data.Map qualified as Map
 -- mayber data type
 import Data.Maybe (fromJust)
 import Data.Tree
-import Distribution.Simple (UserHooks (hookedPrograms))
-import GHC.Version (cProjectVersion)
 -- system exit
 import System.Exit
 -- IO Lib
@@ -31,7 +29,6 @@ import XMonad.Layout.ThreeColumns
 -- hooks
 import XMonad.ManageHook
 -- ungrab lib
-import XMonad.Operations (unGrab)
 -- utils
 import XMonad.Util.EZConfig (additionalKeysP)
 import XMonad.Util.Loggers
@@ -68,8 +65,8 @@ mybrowser = "firefox"
 
 -- my default terminal
 myTerminal, myTerminalAlt :: String
-myTerminal = "$HOME/dotfiles/.config/scripts/kitty.sh"
-myTerminalAlt = "$HOME/.config/scripts/alacritty.sh"
+myTerminal = "kitty"
+myTerminalAlt = "alacritty"
 
 -- colors of window borders
 myNormalBorderColor, myFocusBorderColor :: String
@@ -106,9 +103,9 @@ myKeys =
     ("<XF86AudioLowerVolume>", spawn "~/dotfiles/.config/scripts/volume.sh -d"),
     ("<XF86AudioMute>", spawn "~/dotfiles/.config/scripts/volume.sh -m"),
     ("<XF86MonBrightnessUp>", spawn "~/dotfiles/.config/scripts/brightness up"),
-    ("<XF86MonBrightnessDown>", spawn "~/dotfiles/.config/scripts/brightness down"),
-    ("M-<Up>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness up"),
-    ("M-<Down>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness down")
+    ("<XF86MonBrightnessDown>", spawn "~/dotfiles/.config/scripts/brightness down")
+    -- ("M-<Up>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness up"),
+    -- ("M-<Down>", unGrab >> spawn "~/dotfiles/.config/scripts/brightness down")
     -- ("M-h", focus left),
     -- ("M-l", focus right),
     -- ("M-j", focus down),

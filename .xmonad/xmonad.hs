@@ -164,7 +164,7 @@ myStartupHook = do
   spawnOnce "$HOME/dotfiles/.config/scripts/wall.sh"
   spawnOnce "dunst -c $HOME/dotfiles/.config/dunst/dunstrc -startup_notification"
   spawnOnce "nm-applet"
-  spawnOnce "picom -f -i -m=1.0 -r 0 -c -i 0.7 -l 0 -t 0 -b"
+  spawnOnce "picom"
   spawnOnce "lxsession --session=xmonadwm --de=xmonad & "
   spawnOnce "nwg-look -a"
   spawnOnce

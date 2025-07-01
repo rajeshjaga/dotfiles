@@ -23,7 +23,8 @@ source ~/.zsh_alias
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
 
 # keybindings mode
-bindkey -v
+#bindkey -v
+[[ -f "$(which fastfetch)" ]] && fastfetch
 
 #save history of executed commands
 HISTSIZE=10000

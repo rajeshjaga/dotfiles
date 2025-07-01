@@ -16,4 +16,5 @@ configuration{
     sidebar-mode: true;
 }
 
+//@theme "colors-rofi-dark"
 @theme "catppuccin-mocha"

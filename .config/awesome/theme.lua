@@ -12,7 +12,8 @@ local themes_path                               = gfs.get_themes_dir()
 
 local theme                                     = {}
 
-theme.font                                      = "Fira Code 14"
+theme.font                                      = "JetBrainsMono Nerd Font 14"
+theme.taglist_font                              = "JetBrainsMono 14"
 
 theme.bg_normal                                 = "#1e1e2e"
 theme.bg_focus                                  = "#"
@@ -45,12 +46,9 @@ theme.border_color_marked                       = "#91231c"
 
 -- Generate taglist squares:
 local taglist_square_size                       = dpi(4)
-theme.taglist_squares_sel                       = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
-)
-theme.taglist_squares_unsel                     = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
-)
+theme.taglist_squares_sel                       = theme_assets.taglist_squares_sel(taglist_square_size, theme.fg_normal)
+theme.taglist_squares_unsel                     = theme_assets.taglist_squares_unsel(taglist_square_size, theme
+.fg_normal)
 
 -- Variables set for theming notifications:
 -- notification_font
@@ -97,7 +95,7 @@ theme.titlebar_maximized_button_focus_inactive  = themes_path .. "default/titleb
 theme.titlebar_maximized_button_normal_active   = themes_path .. "default/titlebar/maximized_normal_active.png"
 theme.titlebar_maximized_button_focus_active    = themes_path .. "default/titlebar/maximized_focus_active.png"
 
-theme.wallpaper                                 = "/usr/share/wallpapers/0.jpg"
+theme.wallpaper                                 = "/home/jraj/Pictures/wally/1214931.jpg"
 
 -- You can use your own layout icons like this:
 theme.layout_fairh                              = themes_path .. "default/layouts/fairhw.png"

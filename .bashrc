@@ -37,7 +37,7 @@ alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo | xargs bash -c"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 119.98 --right-of eDP-1"
 alias obi-sync="rclone sync /home/jraj/obsidian/test/ obsidian:test --progress"
-alias econf="nvim ~/.config/"
+alias econf="nvim ~/dotfiles/.config/"
 
 
 function gcl(){

@@ -1,0 +1,73 @@
+@import "../../.cache/wal/colors-waybar.css";
+*{
+    font-family: "JetBrainsMono Nerd Font", "Fira Code", monospace;
+    font-size: 16px;
+}
+
+window#waybar {
+    background-color: @color1;
+    background: transparent;
+    border-radius: 5px;
+    margin: 5px 5px 5px 5px;
+}
+
+.modules-right, .modules-left, .modules-center {
+    background: @background;
+    color: @color1;
+    margin: 5px 5px 5px 5px;
+    padding: 5px;
+    border-radius : 8px;
+    border: 1px @background solid;
+}
+
+#network,
+#backlight,
+#temperature,
+#battery,
+#pulseaudio,
+#clock{
+    border-radius :5px;
+    padding : 1px 12px 1px 12px;
+    /*background-color: rgba(0,150,0,1);*/
+}
+
+#clock{
+    color: @background;
+    background-color: @color1;
+}
+#network{
+    color:@background;
+    background-color: @color2;
+}
+#temperature{
+    color:@background;
+    background-color: @color3;
+}
+#temperature .critical{
+    color:@background;
+    background-color: @color2;
+}
+#backlight{
+    color:@foreground;
+    background-color: @color4;
+}
+#pulseaudio{
+    color:@background;
+    background-color: @color6;
+}
+#battery{
+    color:@background;
+    background-color: @color7;
+}
+
+#custom-power{
+    background: @color9;
+    padding:0px 4px 0px 10px;
+    border-radius :5px;
+    color: @foreground;
+}
+#tray{
+    background: @color8;
+    padding: 0px 10px 0px 10px;
+    border-radius :5px;
+}

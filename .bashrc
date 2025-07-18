@@ -14,11 +14,11 @@ else
 fi
 
 
-if [ ! -f  "$HOME/.cargo/env" ]; then 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-else 
-    . "$HOME/.cargo/env"
-fi
+#if [ ! -f  "$HOME/.cargo/env" ]; then 
+#  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+#else 
+#    . "$HOME/.cargo/env"
+#fi
 
 alias ls='exa --icons'
 alias ll='exa -lah --icons'
@@ -34,6 +34,10 @@ alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude nod
 alias vscode='/usr/bin/code'
 #alias gcl='git clone '
 alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo | xargs bash -c"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 119.98 --right-of eDP-1"
+alias obi-sync="rclone sync /home/jraj/obsidian/test/ obsidian:test --progress"
+alias econf="nvim ~/.config/"
 
 
 function gcl(){
@@ -57,11 +61,11 @@ fi
 if [ ! -z $(which pacman  2>/dev/null) ]; then
     alias install='sudo pacman -S '
     alias search='sudo pacman -Ss'
-    alias updatemirror='sudo reflector --age 6 --country IN --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist 2>/dev/null'
+    alias update-mirror='sudo reflector --age 6 --country IN --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist 2>/dev/null'
 fi
 if [ ! -z $(which apt  2>/dev/null) ]; then
     alias install='sudo apt install '
-    alias update='sudo apt update &&'
+    alias update='sudo apt update'
     alias listupgrade='sudo apt list --upgradable'
 fi
 
@@ -75,4 +79,5 @@ export TERMINAL=kitty
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-notify-send "Fix mongo request fro admin register see insomnia"
+eval "$(starship init bash)"
+#notify-send "Check hyprland pywal config to import dynamic colors and fallback colors"

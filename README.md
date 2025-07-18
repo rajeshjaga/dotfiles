@@ -22,9 +22,9 @@ This is the config folder for my linux machine for window manager and more tools
 - xmobar
 - sxwm
 - tmux
-```bash
-Ctrl+S #modifier
-```
+    ```bash
+    Ctrl+S #modifier
+    ```
 
 ```bash
 git clone https://github.com/rajeshjaga/dotfiles ~/dotfiles/

@@ -49,12 +49,6 @@ else
   [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 fi
 
-if [ ! -f  "$HOME/.cargo/env" ]; then 
-  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-  reload
-else 
-    . "$HOME/.cargo/env"
-fi
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

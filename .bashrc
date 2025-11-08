@@ -3,41 +3,78 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-
-if [ ! -d $NVM_DIR ]; then 
-    curl -o- "https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh" | bash
-else
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+if [ -f /usr/share/bash-completion/bash_completion ]; then
+	. /usr/share/bash-completion/bash_completion
+elif [ -f /etc/bash_completion ]; then
+	. /etc/bash_completion
 fi
 
+# Expand the history size
+export HISTFILESIZE=10000
+export HISTSIZE=500
+export HISTTIMEFORMAT="%F %T" # add timestamp to history
 
-#if [ ! -f  "$HOME/.cargo/env" ]; then 
-#  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-#else 
-#    . "$HOME/.cargo/env"
-#fi
+# Don't put duplicate lines in the history and do not add lines that start with a space
+export HISTCONTROL=erasedups:ignoredups:ignorespace
 
+# Check the window size after each command and, if necessary, update the values of LINES and COLUMNS
+shopt -s checkwinsize
+
+# Causes bash to append to history instead of overwriting it so if you start a new terminal, you have old session history
+shopt -s histappend
+PROMPT_COMMAND='history -a'
+
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_STATE_HOME="$HOME/.local/state"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+
+# Ignore case on auto-completion
+# Note: bind used instead of sticking these in .inputrc
+if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
+
+# Show auto-completion list automatically, without double tab
+if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
+
+# Alias's to modified commands
+alias cp='cp -i'
+alias mv='mv -i'
+alias mkdir='mkdir -p'
+alias home='cd ~'
+alias cd..='cd ..'
+alias ..='cd ..'
+alias rmd='/bin/rm  --recursive --force --verbose '
+alias lf="ls -l | egrep -v '^d'"  # files only
+alias ldir="ls -l | egrep '^d'"   # directories only
+alias labc='ls -lap'              # alphabetical sort
+alias ls='ls -aFh --color=always' # add colors and file type extensions
+alias lx='ls -lXBh'               # sort by extension
+alias lk='ls -lSrh'               # sort by size
+alias lc='ls -ltcrh'              # sort by change time
+alias lu='ls -lturh'              # sort by access time
+alias lg='lazygit'
 alias ls='exa --icons'
 alias ll='exa -lah --icons'
+alias rm='rm -i'
 alias t='tmux'
 alias g='git'
 alias c='clear'
 alias v='nvim'
 alias nv='nvim'
 alias vim='nvim'
+alias cat='bat'
 alias chdotfiles='nvim $(fd --full-path $HOME/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
 alias code='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
 alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
 alias vscode='/usr/bin/code'
 #alias gcl='git clone '
-alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo | xargs bash -c"
+alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
-alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 119.98 --right-of eDP-1"
-alias obi-sync="rclone sync /home/jraj/obsidian/test/ obsidian:test --progress"
+alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 144 --right-of eDP-1"
+alias obi-sync="rclone sync $HOME/obsidian/test/ obsidian:test --progress"
 alias econf="nvim ~/dotfiles/.config/"
+#alias rm="mv $1 .trash"
 
 
 function gcl(){
@@ -61,7 +98,7 @@ fi
 if [ ! -z $(which pacman  2>/dev/null) ]; then
     alias install='sudo pacman -S '
     alias search='sudo pacman -Ss'
-    alias update-mirror='sudo reflector --age 6 --country IN --fastest 5 --sort rate --save /etc/pacman.d/mirrorlist 2>/dev/null'
+    alias update-mirror='sudo reflector --age 5 --country IN --fastest 5 --save /etc/pacman.d/mirrorlist 2>/dev/null'
 fi
 if [ ! -z $(which apt  2>/dev/null) ]; then
     alias install='sudo apt install '
@@ -81,3 +118,4 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 eval "$(starship init bash)"
 #notify-send "Check hyprland pywal config to import dynamic colors and fallback colors"
+

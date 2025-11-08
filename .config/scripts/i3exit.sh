@@ -6,7 +6,7 @@ activesession="$(loginctl list-sessions | grep active | awk '{print $1}')"
 
 case $exitresponse in
     "Exit i3")
-        dunstify "Exiting i3.. in 4s"
+        notify-send -u critical -t 300 -i /usr/share/icons/Papirus-Dark/64x64/apps/system-shutdown.svg help       
         sleep 4
         loginctl kill-session $activesession 
         i3-msg exit

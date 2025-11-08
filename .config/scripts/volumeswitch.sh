@@ -8,12 +8,12 @@ case $XDG_SESSION_TYPE in
     selected_op=$(printf "Headphone\nSpeakers" | wofi --show dmenu | xargs echo)
     ;;
     *)
-    selected_op=$(printf "Headphone\nSpeakers" | rofi -show dmenu | xargs echo)
+    selected_op=$(printf "Headphone\nSpeakers" | rofi -dmenu | xargs echo)
     ;;
     esac
 
 speaker(){
-     pactl set-default-sink alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink
+    pactl set-default-sink alsa_output.pci-0000_00_1f.3-platform-skl_hda_dsp_generic.HiFi__Speaker__sink
     notify-send --icon=speaker "Default Sink switched to speaker or $(pactl get-default-sink)" --expire-time=700
 }
 

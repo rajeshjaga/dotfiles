@@ -1,16 +1,37 @@
-alias ls=exa
-alias la='\usr\bin\ls -la'
-alias ll='exa -lah'
-alias l='exa -l'
-alias vim=nvim
-alias g=git
-alias t=tmux
+alias lg='lazygit'
+alias ls='exa --icons'
+alias ll='exa -lah --icons'
+alias rm='rm -i'
+alias t='tmux'
+alias g='git'
 alias c='clear'
+alias v='nvim'
 alias nv='nvim'
-alias chdotfiles='nvim $(fd --full-path ~/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
-alias code='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
-alias chcode='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
-#alias ='cd $(fd --full-path ~/code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+alias vim='nvim'
+alias cat='bat'
+alias chdotfiles='nvim $(fd --full-path $HOME/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
+alias code='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
+alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
+alias vscode='/usr/bin/code'
+#alias gcl='git clone '
+alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo | xargs bash -c"
+alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
+alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 119.98 --right-of eDP-1"
+alias obi-sync="rclone sync /home/$(echo $USER)/obsidian/test/ obsidian:test --progress"
+alias econf="nvim ~/dotfiles/.config/"
+
+
+function gcl(){
+    local repo=$1
+    local j=$2
+    if [ $(which git 2>/dev/null) ]; then
+        notify-send "git cloning in to $(echo $1)"
+        $(git clone https://github.com/$repo $j)
+    fi
+}
+
+export EDITOR=nvim
+export TERMINAL=kitty
 
 if [ "$( which pacman 2> /dev/null)" ]; then
         alias updatemirror='sudo reflector --sort score --country IN --save /etc/pacman.d/mirrorlist; sudo pacman -Sy'

@@ -10,7 +10,7 @@ Config { overrideRedirect = False
                         , "--normal", "#a6e3a1"
                         ] 10
                     , Run Alsa "default" "Master"
-                        [ "--template", "<volumestatus>"
+                        [ "--template", "Vol: <volumestatus>"
                         , "--suffix"  , "True"
                         , "--"
                         , "--on", ""
@@ -31,12 +31,11 @@ Config { overrideRedirect = False
                                        , "-i"	, "<fc=#006000>Charged</fc>"
                              ] 50
                     , Run Memory ["--template", "Mem: <usedratio>%"] 10
-                    , Run Swap [] 10
                     , Run Date "%a %Y-%m-%d <fc=#8be9fd>%H:%M</fc>" "date" 10
                     , Run XMonadLog
                     ]
        , sepChar  = "%"
        , alignSep = "}{"
-       , template = "%XMonadLog% }{ %battery% | %alsa:default:Master% | %cpu% | %memory% * %swap% | %date% "
+       , template = "%XMonadLog% }{ %battery% | %alsa:default:Master% | %cpu% | %memory% | %date% "
        }
 

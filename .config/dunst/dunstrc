@@ -1,4 +1,5 @@
 [global]
+    follow=keyboard
     width = 400
     progress_bar_min_width = 380
     progress_bar_max_width = 380

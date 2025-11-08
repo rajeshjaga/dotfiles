@@ -44,7 +44,7 @@ myModMask = mod4Mask
 
 -- Launcher Menu
 myLauncher, myLauncherAlt :: String
-myLauncher = "dmenu_run -fn 'FiraCode -14' -nb '#1e1e2e' -nf '#cdd6f4' -sf '#1e1e2e' -sb '#89decb'"
+myLauncher = "dmenu_run -l 10 -fn 'JetBrainsMono Nerd Font -14' -nb '#1e1e2e' -nf '#cdd6f4' -sf '#1e1e2e' -sb '#89decb'"
 myLauncherAlt = "rofi -show drun"
 
 -- fonts
@@ -61,7 +61,7 @@ myFileExplorerAlt = "pcmanfm"
 
 -- my default browser
 mybrowser :: String
-mybrowser = "firefox"
+mybrowser = "zen-browser"
 
 -- my default terminal
 myTerminal, myTerminalAlt :: String
@@ -161,12 +161,13 @@ myLayoutHook = tiled ||| Mirror tiled ||| Full ||| threeCol
 -- startup apps
 myStartupHook :: X ()
 myStartupHook = do
-  spawnOnce "$HOME/dotfiles/.config/scripts/wall.sh"
+  spawnOnce "wal -i $HOME/Pictures/wally/forest.jpg"
   spawnOnce "dunst -c $HOME/dotfiles/.config/dunst/dunstrc -startup_notification"
   spawnOnce "nm-applet"
   spawnOnce "picom"
   spawnOnce "lxsession --session=xmonadwm --de=xmonad & "
   spawnOnce "nwg-look -a"
+  spawnOnce "xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 144 --right-of eDP-1"
   spawnOnce
     "trayer --edge top --align right --SetDockType true \
     \--SetPartialStrut true --expand true --width 10 \
@@ -176,7 +177,7 @@ myManageHook :: ManageHook
 myManageHook =
   composeAll
     [ className =? "Gimp" --> doFloat,
-      className =? "firefox" --> doShift "2",
+      className =? "zen-browser" --> doShift "2",
       className =? "kitty" --> doShift "1",
       className =? "alacritty" --> doShift "1",
       className =? "pavucontrol" --> doFloat,
@@ -206,3 +207,4 @@ main =
     . ewmh
     . withEasySB (statusBarProp "xmobar ~/dotfiles/.xmobarrc" (pure myXmobarPP)) toggleStructsKey
     $ myconfig
+

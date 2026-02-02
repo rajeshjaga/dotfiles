@@ -60,10 +60,8 @@ alias rm='rm -i'
 alias t='tmux'
 alias g='git'
 alias c='clear'
-alias v='nvim'
 alias nv='nvim'
 alias vim='nvim'
-alias cat='bat'
 alias chdotfiles='nvim $(fd --full-path $HOME/dotfiles/  --type file -H --exclude .git | fzf-tmux -p --reverse);'
 alias code='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
 alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
@@ -86,10 +84,24 @@ function gcl(){
     fi
 }
 
+function git_ssh(){
+    eval "$(ssh-agent -s)"
+    ssh-add ~/.ssh/enterprise
+}
+
+function mkcd(){
+    local dir=$1
+    if [ -d $dir ]; then
+        cd $dir
+    else
+        mkdir -p $dir
+        cd $dir
+    fi
+}
+
 PS1='\u@\h \W \$ '
 
-[[ ! -z $(which neofetch 2>/dev/null) ]] && neofetch
-[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch
+[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch -c examples/17
 
 if [ ! -z $(which xbps-install 2>/dev/null) ]; then
     alias install='sudo xbps-install'
@@ -107,6 +119,7 @@ if [ ! -z $(which apt  2>/dev/null) ]; then
 fi
 
 export -f gcl
+export -f mkcd
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
 export PATH=$PATH:$HOME/Clone/lua-language-server/bin
 export EDITOR=nvim
@@ -116,6 +129,19 @@ export TERMINAL=kitty
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+if [ ! $(echo $XDG_SESSION_TYPE) == "wayland" ]; then
+    xset r rate 250 35
+fi
+
 eval "$(starship init bash)"
+eval "$(zoxide init bash)"
 #notify-send "Check hyprland pywal config to import dynamic colors and fallback colors"
 
+
+export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+export PATH=$JAVA_HOME/bin:$PATH
+
+export PYENV_ROOT="$HOME/.pyenv"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init - bash)"
+eval "$(pyenv virtualenv-init -)"

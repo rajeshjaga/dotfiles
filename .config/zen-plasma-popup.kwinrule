@@ -1,0 +1,24 @@
+[zen browser video popup]
+Description=zen browser video popup
+above=true
+aboverule=4
+desktops=820d6c8d-7991-4e89-90e3-abbb57a28300
+desktopsrule=3
+layer=above
+layerrule=2
+minsize=456,257
+minsizerule=2
+noborder=true
+noborderrule=3
+position=3363,750
+positionrule=3
+size=456,257
+sizerule=3
+skipswitcher=true
+skipswitcherrule=4
+skiptaskbar=true
+skiptaskbarrule=4
+title=Picture-in-Picture
+titlematch=1
+wmclass=zen
+wmclassmatch=1

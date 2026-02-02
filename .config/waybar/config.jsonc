@@ -6,11 +6,11 @@
   "spacing": 4,
   "modules-left": [
       "custom/menu",
-    "hyprland/workspaces",
+      "sway/workspaces",
   ],
-  "modules-center": [
-      "hyprland/window"
-  ],
+  // "modules-center": [
+  //     // "hyprland/window"
+  // ],
   "modules-right": [
     "memory",
     "temperature",

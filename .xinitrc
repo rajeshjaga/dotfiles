@@ -38,9 +38,6 @@ fi
  xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 120 --right-of eDP-1 --noprimary
 ~/.config/polybar/launch.sh &
 
-exec sxwm
-#twm &
-#xclock -geometry 50x50-1+1 &
-#xterm -geometry 80x50+494+51 &
-#xterm -geometry 80x20+494-0 &
-#exec xterm -geometry 80x66+0+0 -name login
+exec dwm
+exec flameshot
+exec picom -f

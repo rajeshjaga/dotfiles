@@ -38,6 +38,7 @@ if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
 if [[ $iatest -gt 0 ]]; then bind "set show-all-if-ambiguous On"; fi
 
 # Alias's to modified commands
+alias so='source'
 alias cp='cp -i'
 alias mv='mv -i'
 alias mkdir='mkdir -p'
@@ -135,13 +136,26 @@ fi
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+if [ ! $( which autuin 2>/dev/null ) ]; then
+    export ATUIN_NOBIND="true"
+    eval "$(atuin init bash)"
+    atuin-bind '\C-a' atuin-search
+fi
 #notify-send "Check hyprland pywal config to import dynamic colors and fallback colors"
 
 
-export JAVA_HOME=/usr/lib/jvm/java-21-openjdk
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
 export PATH=$JAVA_HOME/bin:$PATH
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - bash)"
 eval "$(pyenv virtualenv-init -)"
+
+export NVM_DIR="$HOME/.config/nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

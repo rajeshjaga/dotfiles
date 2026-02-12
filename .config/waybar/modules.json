@@ -1,100 +1,94 @@
 {
-    "sway/workspaces":{
+    "hyprland/workspaces": {
         "format": "{name}",
-        "presistent-workspaces": [],
-        "active-only": true,
-    },
-    "hyprland/window":{
-        "format": "{class}",
-        "tooltip": false,
-        "icon":true,
-        "max-length": 30,
-        "separate-outputs":true
-    },
-    "hyprland/workspaces":{
-        "format": "{name}",
-//        "active-only": true,
-        "presistent-only":true,
-        "presistent-workspaces":{
-            "HDMI-A-1": [1,3],
+       "presistent-only":true,
+        "persistent-workspaces": {
+             "HDMI-A-1": [1,3],
             "eDP-1": [2,4]
         }
     },
+    "hyprland/window": {
+        "format": "{class}",
+        "max-length": 30,
+        "separate-outputs": true
+    },
     "tray": {
-        "icon-size": 21,
+        // "icon-size": 21,
         "spacing": 10,
         // "icons": {
-            //   "blueman": "bluetooth",
-            //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
-            // }
+        //   "blueman": "bluetooth",
+        //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
+        // }
     },
     "clock": {
-        "timezone": "Asia/Kolkata",
+        // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "󱑌 {:%H:%M}",
-        "format-alt": "󱑌{:%Y-%m-%d}"
+        "format-alt": "{:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "{usage}% ",
+        "tooltip": false
     },
     "memory": {
-        "format": " {}%"
+        "format": "{}% "
     },
     "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
-        "format": " {temperatureC}°C",
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
     },
     "backlight": {
-        "format": "󰍹 {percent}%",
+        // "device": "acpi_video1",
+        "format": "{percent}% {icon}",
+        "format-icons": ["", "", "", "", "", "", "", "", ""]
     },
     "battery": {
         "states": {
-             "good": 95,
+            // "good": 95,
             "warning": 30,
             "critical": 15
         },
-        "format": "{icon}{capacity}%",
-        "format-icons": ["󰁺 ", "󰁻 ", "󰁼 ", "󰁽 ", "󰁾 ", "󰁿 ", "󰂀 ", "󰂁 ", "󰂂 ", "󰁹 "],
-        "format-full": "󱟢 {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": "󱟦 {capacity}%",
-        "format-alt": "{icon}{time}",
+        "format": "{capacity}% {icon}",
+        "format-full": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-plugged": "{capacity}% ",
+        "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
         "bat": "BAT2"
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "Wifi: {essid}",
-        "format-ethernet": "ETH0: {ipaddr}/{cidr}",
-        "tooltip-format": "{ifname} via {gwaddr}",
-        "format-linked": "{ifname} (No IP)",
-        "format-disconnected": "Disconnected",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{ipaddr}/{cidr} ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
-        "format": " {volume}%",
-        "format-bluetooth": "󰥰 {volume}%",
-        "format-bluetooth-muted": "󰥰 Mute",
-        "format-muted": " Mute",
-        "format-source": "",
-        "format-source-muted": "",
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
         "on-click": "pavucontrol"
     },
-    "custom/power": {
-        "format" : "⏻",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate",
-            "logout":  "hyprctl dispatch exit"
-        }
-    },
-    "custom/menu":{
-        "format" : "󰣇",
-        "on-click": "wofi --show drun",
-    }
 }

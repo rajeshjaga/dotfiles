@@ -5,7 +5,11 @@ selected_op="x11"
 
 case $XDG_SESSION_TYPE in
     "wayland")
-    selected_op=$(printf "Headphone\nSpeakers" | wofi --show dmenu | xargs echo)
+     if [ $(which wofi 2>/dev/null) ]; then
+        selected_op=$(printf "Headphone\nSpeakers" | wofi --show dmenu | xargs echo)
+    else
+        selected_op=$(printf "Headphone\nSpeakers" | rofi -dmenu | xargs echo)
+     fi
     ;;
     *)
     selected_op=$(printf "Headphone\nSpeakers" | rofi -dmenu | xargs echo)

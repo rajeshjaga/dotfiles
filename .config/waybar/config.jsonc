@@ -1,27 +1,22 @@
+// -*- mode: jsonc -*-
 {
-  "layer": "top", // Waybar at top layer
-  // "width": 1280, // Waybar width 
-  "position": "top",
-  "height": 20, 
-  "spacing": 4,
-  "modules-left": [
-      "custom/menu",
-      "sway/workspaces",
-  ],
-  // "modules-center": [
-  //     // "hyprland/window"
-  // ],
-  "modules-right": [
-    "memory",
-    "temperature",
-    "backlight",
-    "pulseaudio",
-    "battery",
-    "clock",
-    "tray",
-    "custom/power"
-  ],
-  "include":[
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 4, // Gaps between modules (4px)
+    "modules-left": [
+        "hyprland/workspaces",
+    ],
+    "modules-center": [
+        "hyprland/window"
+    ],
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "battery",
+        "clock",
+        "tray",
+    ],
+     "include":[
       "~/.config/waybar/modules.json"
   ]
 }

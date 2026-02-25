@@ -1,8 +1,12 @@
 # .bashrc
+PS4='+ $(date "+%s.%N") ${BASH_SOURCE}:${LINENO}: '
+exec 3>&2 2>/tmp/bashrc_timing2.txt
+set -x
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
+# if bash-completion available use it
 if [ -f /usr/share/bash-completion/bash_completion ]; then
 	. /usr/share/bash-completion/bash_completion
 elif [ -f /etc/bash_completion ]; then
@@ -67,13 +71,11 @@ alias chdotfiles='nvim $(fd --full-path $HOME/dotfiles/  --type file -H --exclud
 alias code='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse); nv'
 alias chcode='cd $(fd --full-path $HOME/Code/  --type directory -H --exclude node_modules | fzf-tmux -p --reverse)'
 alias vscode='/usr/bin/code'
-#alias gcl='git clone '
 alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 144 --right-of eDP-1"
 alias obi-sync="rclone sync $HOME/obsidian/test/ obsidian:test --progress"
 alias econf="nvim ~/dotfiles/.config/"
-#alias rm="mv $1 .trash"
 
 
 function gcl(){
@@ -100,40 +102,31 @@ function mkcd(){
     fi
 }
 
-PS1='\u@\h \W \$ '
+# ps1 export
+export PS1='\u@\h \W \$ '
 
+# fastfetch only if available
 [[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch -c examples/17
-
-if [ ! -z $(which xbps-install 2>/dev/null) ]; then
-    alias install='sudo xbps-install'
-    alias search='sudo xbps-query -Rs'
-fi
+# If arch linux then have reflector on
 if [ ! -z $(which pacman  2>/dev/null) ]; then
-    alias install='sudo pacman -S '
-    alias search='sudo pacman -Ss'
-    alias update-mirror='sudo reflector --age 5 --country IN --fastest 5 --save /etc/pacman.d/mirrorlist 2>/dev/null'
-fi
-if [ ! -z $(which apt  2>/dev/null) ]; then
-    alias install='sudo apt install '
-    alias update='sudo apt update'
-    alias listupgrade='sudo apt list --upgradable'
+    if [ ! -z $( which reflector 2> /dev/null) ]; then
+        alias update-mirror='sudo reflector --age 5 --country IN --fastest 5 --save /etc/pacman.d/mirrorlist 2>/dev/null'
+    fi
 fi
 
+# some function exports
 export -f gcl
 export -f mkcd
 export PATH=$PATH:$HOME/dotfiles/.config/scripts
-export PATH=$PATH:$HOME/Clone/lua-language-server/bin
 export EDITOR=nvim
 export TERMINAL=kitty
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
-
+# setting keyboard rate only for x11 session
 if [ ! $(echo $XDG_SESSION_TYPE) == "wayland" ]; then
     xset r rate 250 35
 fi
 
+# init starship prompt, zoxide, autin if avilable
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
 if [ ! $( which autuin 2>/dev/null ) ]; then
@@ -141,21 +134,28 @@ if [ ! $( which autuin 2>/dev/null ) ]; then
     eval "$(atuin init bash)"
     atuin-bind '\C-a' atuin-search
 fi
-#notify-send "Check hyprland pywal config to import dynamic colors and fallback colors"
 
+# programming and emacs
+# export NVM_DIR="$HOME/.config/nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+if [ -d $HOME/.config/emacs/bin ]; then
+    export PATH=$PATH:$HOME/.config/emacs/bin/
+fi
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
+# java path
 export PATH=$JAVA_HOME/bin:$PATH
 
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - bash)"
-eval "$(pyenv virtualenv-init -)"
+# adb stuff
+if [ -d $HOME/.local/bin/adb_android/ ]; then
+    export PATH=$PATH:$HOME/.local/bin/adb_android
+fi
 
-export NVM_DIR="$HOME/.config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+set +x
+exec 2>&3 3>&-
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH

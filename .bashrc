@@ -1,8 +1,4 @@
 # .bashrc
-PS4='+ $(date "+%s.%N") ${BASH_SOURCE}:${LINENO}: '
-exec 3>&2 2>/tmp/bashrc_timing2.txt
-set -x
-
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -34,6 +30,13 @@ export XDG_STATE_HOME="$HOME/.local/state"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 
+if [ -d /opt/python310/ ]; then
+    export PATH=$PATH:/opt/python310/bin
+fi
+if [ -d $HOME/Develop/flutter/ ]; then
+    export PATH=$PATH:$HOME/Develop/flutter/bin/
+fi
+export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
 # Ignore case on auto-completion
 # Note: bind used instead of sticking these in .inputrc
 if [[ $iatest -gt 0 ]]; then bind "set completion-ignore-case on"; fi
@@ -107,6 +110,7 @@ export PS1='\u@\h \W \$ '
 
 # fastfetch only if available
 [[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch -c examples/17
+#
 # If arch linux then have reflector on
 if [ ! -z $(which pacman  2>/dev/null) ]; then
     if [ ! -z $( which reflector 2> /dev/null) ]; then
@@ -156,6 +160,4 @@ if [ -d $HOME/.local/bin/adb_android/ ]; then
     export PATH=$PATH:$HOME/.local/bin/adb_android
 fi
 
-set +x
-exec 2>&3 3>&-
-export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig:$PKG_CONFIG_PATH
+export CHROME_EXECUTABLE=/usr/bin/chromium

@@ -179,6 +179,28 @@ window-rule {
     open-maximized true
     open-on-output "HDMI-A-1"
 }
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
 window-rule {
     match app-id=r#"zen$"# title="^Picture-in-Picture$"
     open-floating true
@@ -222,22 +244,25 @@ binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
 
-    Mod+Return        hotkey-overlay-title="Open a Terminal: kitty"     { spawn "kitty"; }
-    Mod+Shift+Return  hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
-    Mod+B             hotkey-overlay-title="Run an Application: zen"    { spawn "zen-browser"; }
-    Super+X           hotkey-overlay-title="Lock the Screen: swaylock"  { spawn "swaylock -c /home/jraj/Pictures/wally/malenia-edit.jpg"; }
-    Super+I           hotkey-overlay-title="Launch Waybar"              { spawn-sh "waybar"; }
-    Super+Shift+I     hotkey-overlay-title="Kill Waybar"                { spawn-sh "pkill -9 waybar"; }
-    Mod+D             hotkey-overlay-title="Run an Application: rofi"   { spawn-sh "rofi -show drun"; }
-    Mod+Shift+X       hotkey-overlay-title="System: lock & suspend"     {spawn-sh "systemctl suspend && swaylock -i /home/jraj/Pictures/wally/malenia-edit.jpg";}
+    Mod+Return        hotkey-overlay-title="Open a Terminal: kitty"         { spawn "kitty"; }
+    Mod+V             hotkey-overlay-title="Open default sink switcher"     { spawn-sh "/home/jraj/.config/scripts/volumeswitch.sh"; }
+    Mod+E             hotkey-overlay-title="Open a File Explorer: Thunar"   { spawn "thunar"; }
+    Mod+Shift+Return  hotkey-overlay-title="Open a Terminal: alacritty"     { spawn "alacritty"; }
+    Mod+B             hotkey-overlay-title="Run an Application: zen"        { spawn "zen-browser"; }
+    Super+X           hotkey-overlay-title="Lock the Screen: swaylock"      { spawn "swaylock -c /home/jraj/Pictures/wally/malenia-edit.jpg"; }
+    Super+I           hotkey-overlay-title="Launch Waybar"                  { spawn-sh "waybar"; }
+    Super+Shift+I     hotkey-overlay-title="Kill Waybar"                    { spawn-sh "pkill -9 waybar"; }
+    Mod+D             hotkey-overlay-title="Run an Application: rofi"       { spawn-sh "rofi -show drun"; }
+    Mod+Shift+X       hotkey-overlay-title="System: lock & suspend"         { spawn-sh "systemctl suspend && swaylock -i /home/jraj/Pictures/wally/malenia-edit.jpg ";}
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "$HOME/.config/scripts/volume.sh -u"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "$HOME/.config/scripts/volume.sh -d"; }
     XF86AudioMute        allow-when-locked=true { spawn-sh "$HOME/.config/scripts/volume.sh -m"; }
     XF86AudioMicMute     allow-when-locked=true { spawn-sh "pactl set-source-mute @DEFAULT_SOURCE@ toggle"; }
+    Super+Shift+Q     allow-when-locked=true { spawn-sh "$HOME/.config/scripts/power.sh"; }
 
-    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "$HOME/.config/scripts/brightness up"; }
-    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "$HOME/.config/scripts/brightness down"; }
+    XF86MonBrightnessUp allow-when-locked=true { spawn-sh "$HOME/.config/scripts/brightness.sh up"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn-sh "$HOME/.config/scripts/brightness.sh down"; }
 
     Mod+O repeat=false { toggle-overview; }
 
@@ -400,7 +425,7 @@ binds {
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Mod+Shift+Q { quit; }
+    Mod+Ctrl+Q { quit; }
 
     Mod+Shift+P { power-off-monitors; }
 }

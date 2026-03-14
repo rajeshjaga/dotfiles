@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+video_download() {
+    if command -v yt-dlp 2&>/dev/null; then
+        if -d $HOME/Videos/Downloads; then
+            yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" \
+                --merge-output-format mp4 \
+                --no-playlist -R 5 -o "$HOME/Videos/Downloads/%(title)s.%(ext)s" \
+                $1  && notify-send "Download Complete!" "✓ $(yt-dlp --get-filename -o '%(title)s.%(ext)s' "$1")"
+        else
+            echo Dint find any Downlaods Folder
+            mkdir -pv $HOME/Videos/Downloads/
+            yt-dlp -f "bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best" \
+                --merge-output-format mp4 \
+                --no-playlist -R 5 -o "$HOME/Videos/Downloads/%(title)s.%(ext)s" \
+                $1  && notify-send "Download Complete!""✓ $(yt-dlp --get-filename -o '%(title)s.%(ext)s' "$1")"
+        fi
+    else
+        echo "failed to find yt-dlp"
+    fi
+}
+
+audio_download() {
+    if command -v yt-dlp 2&>/dev/null; then
+        if -d $HOME/Videos/Downloads; then
+            yt-dlp -x --audio-format mp3 --audio-quality 0 \
+                --no-playlist -R 5 -o "$HOME/Music/Downloads/%(title)s.%(ext)s" \
+                $1  && notify-send "Download Complete!""✓ $(yt-dlp --get-filename -o '%(title)s.%(ext)s' "$1")"
+        else
+            echo Dint find any Downlaods Folder
+            mkdir -pv $HOME/Videos/Downloads/
+            yt-dlp -x --audio-format mp3 --audio-quality 0\
+                --no-playlist -R 5 -o "$HOME/Music/Downloads/%(title)s.%(ext)s" \
+                $1  && notify-send "Download Complete!" "✓ $(yt-dlp --get-filename -o '%(title)s.%(ext)s' "$1")"
+        fi
+    else
+        echo "failed to find yt-dlp"
+    fi
+}
+
+if command -v rofi 2&>/dev/null; then
+    uri=$(rofi -dmenu)
+    media=$(printf "Video\nAudio" | rofi -dmenu)
+    echo Dowloading $media $uri
+    if [ "$media" == "Video" ]; then
+        video_download $uri
+    elif [ "$media" == "Audio" ]; then
+        audio_download $uri
+    else
+        echo Dint find valid response
+    fi
+fi
+

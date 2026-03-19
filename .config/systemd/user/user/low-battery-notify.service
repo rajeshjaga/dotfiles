@@ -1,0 +1,10 @@
+[Unit]
+Description=Battery low notifier
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/bash /home/jraj/.config/systemd/battery/battery_idle_watch.sh
+Restart=always

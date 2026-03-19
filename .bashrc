@@ -161,3 +161,4 @@ if [ -d $HOME/.local/bin/adb_android/ ]; then
 fi
 
 export CHROME_EXECUTABLE=/usr/bin/chromium
+alias ssh='TERM=xterm-256color ssh'

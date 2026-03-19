@@ -240,6 +240,9 @@ xwayland-satellite {
     path "xwayland-satellite"
 }
 
+// autostart 
+spawn-sh-at-startup "~/.config/scripts/swaykill start"
+
 binds {
 
     Mod+Shift+Slash { show-hotkey-overlay; }
@@ -249,11 +252,13 @@ binds {
     Mod+E             hotkey-overlay-title="Open a File Explorer: Thunar"   { spawn "thunar"; }
     Mod+Shift+Return  hotkey-overlay-title="Open a Terminal: alacritty"     { spawn "alacritty"; }
     Mod+B             hotkey-overlay-title="Run an Application: zen"        { spawn "zen-browser"; }
-    Super+X           hotkey-overlay-title="Lock the Screen: swaylock"      { spawn "swaylock -c /home/jraj/Pictures/wally/malenia-edit.jpg"; }
     Super+I           hotkey-overlay-title="Launch Waybar"                  { spawn-sh "waybar"; }
     Super+Shift+I     hotkey-overlay-title="Kill Waybar"                    { spawn-sh "pkill -9 waybar"; }
     Mod+D             hotkey-overlay-title="Run an Application: rofi"       { spawn-sh "rofi -show drun"; }
     Mod+Shift+X       hotkey-overlay-title="System: lock & suspend"         { spawn-sh "systemctl suspend && swaylock -i /home/jraj/Pictures/wally/malenia-edit.jpg ";}
+    Mod+X             hotkey-overlay-title="System: lock"                   { spawn-sh "swaylock -i /home/jraj/Pictures/wally/malenia-edit.jpg ";}
+    Mod+Shift+G       hotkey-overlay-title="Kill display timeout"           {spawn-sh "/home/jraj/.config/scripts/swaykill kill"; }
+    Mod+Ctrl+G        hotkey-overlay-title="Start display timeout"          {spawn-sh "/home/jraj/.config/scripts/swaykill start"; }
 
     XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "$HOME/.config/scripts/volume.sh -u"; }
     XF86AudioLowerVolume allow-when-locked=true { spawn-sh "$HOME/.config/scripts/volume.sh -d"; }
@@ -267,6 +272,7 @@ binds {
     Mod+O repeat=false { toggle-overview; }
 
     Mod+Shift+C repeat=false { close-window; }
+    Mod+Ctrl+Q {quit;}
 
     Mod+Left  { focus-column-left; }
     Mod+Down  { focus-window-down; }
@@ -424,8 +430,6 @@ binds {
     Alt+Print { screenshot-window; }
 
     Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-    Mod+Ctrl+Q { quit; }
 
     Mod+Shift+P { power-off-monitors; }
 }

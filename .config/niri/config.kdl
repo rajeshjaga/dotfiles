@@ -1,6 +1,6 @@
 environment {
     QT_QPA_PLATFORM "wayland"
-    DISPLAY null
+    DISPLAY ":1"
 }
 
 cursor {
@@ -82,9 +82,9 @@ layout {
     shadow {
         on
         // draw-behind-window true
-        softness 5
-        spread 5
-        offset x=0 y=5
+        softness 2
+        spread 2
+        offset x=0 y=2
         color "#0007"
     }
 

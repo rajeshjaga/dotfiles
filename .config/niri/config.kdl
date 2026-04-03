@@ -30,7 +30,6 @@ input {
         // accel-profile "flat"
         // scroll-method "no-scroll"
     }
-    warp-mouse-to-focus
     focus-follows-mouse max-scroll-amount="0%"
 }
 
@@ -242,6 +241,7 @@ xwayland-satellite {
 
 // autostart 
 spawn-sh-at-startup "~/.config/scripts/swaykill start"
+spawn-sh-at-startup "mpd-mpris"
 
 binds {
 

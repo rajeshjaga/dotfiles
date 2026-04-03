@@ -27,7 +27,7 @@
         "format-icons": [" ", " ", " ", " ", " "]
     },
     "network": {
-        "format-wifi": "  {essid}({signalStrength}%)",
+        "format-wifi": "  ({signalStrength}%)",
         "format-ethernet": "󰈁 {ipaddr}/{cidr}",
         "tooltip-format": "󰈁 {ifname} via {gwaddr}",
         "format-linked": "󰈂 {ifname} (No IP)",
@@ -36,10 +36,10 @@
         "on-click": "kitty -e nmtui"
     },
     "pulseaudio": {
-        "format": "{icon} {volume}% {format_source}",
-        "format-bluetooth": " {volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": " {volume}% {icon} ",
+        "format-bluetooth-muted": " {icon} ",
+        "format-muted": "{icon} mute",
         "format-source": "  {volume}%",
         "format-source-muted": " ",
         "format-icons": {
@@ -48,4 +48,17 @@
         },
         "on-click": "pavucontrol"
     },
+    "mpris": {
+        "format": "{player_icon} {title}",
+        "max-length":20,
+        "format-paused": "{status_icon} {title}",
+        "tooltip-format" : "<big>{Artist}</big><tt><small>{title} - {player_icon}</small>",
+        "player-icons": {
+            "default": "▶",
+            "mpv": "🎵"
+        },
+        "status-icons": {
+            "paused": "⏸"
+        },
+    }
 }

@@ -109,7 +109,7 @@ function mkcd(){
 export PS1='\u@\h \W \$ '
 
 # fastfetch only if available
-[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch -c examples/17
+[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch 
 #
 # If arch linux then have reflector on
 if [ ! -z $(which pacman  2>/dev/null) ]; then
@@ -162,3 +162,5 @@ fi
 
 export CHROME_EXECUTABLE=/usr/bin/chromium
 alias ssh='TERM=xterm-256color ssh'
+
+complete -C /usr/bin/terraform terraform

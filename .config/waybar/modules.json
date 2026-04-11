@@ -3,7 +3,8 @@
         "format": "{value}",
     },
     "niri/window": {
-        "format": "{}",
+        "format": "{app_id}",
+        "icon": true,
         "max-length": 30,
         "separate-outputs": true
     },
@@ -12,7 +13,7 @@
     },
     "clock": {
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "{:%H:%M - %a %d %B %Y}"
     },
     "battery": {
         "states": {

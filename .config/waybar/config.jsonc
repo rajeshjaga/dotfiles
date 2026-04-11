@@ -1,21 +1,21 @@
 // -*- mode: jsonc -*-
 {
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    "spacing": 4, // Gaps between modules (4px)
+    "position": "top", 
+    "height": 32,
+    "spacing": 10,
     "separator": "|",
     "modules-left": [
         "niri/workspaces",
+        "niri/window",
     ],
     "modules-center": [
-        "niri/window",
+        "clock",
     ],
     "modules-right": [
         "mpris",
         "pulseaudio",
         "network",
         "battery",
-        "clock",
         "tray",
     ],
      "include":[

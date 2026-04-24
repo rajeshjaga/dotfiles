@@ -131,11 +131,12 @@ if [ ! $(echo $XDG_SESSION_TYPE) == "wayland" ]; then
 fi
 
 # init starship prompt, zoxide, autin if avilable
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-if [ ! $( which autuin 2>/dev/null ) ]; then
+if command -v zoxide &>/dev/null; then 
+    eval "$(zoxide init bash)"
+fi
+if command -v autuin &>/dev/null; then
     export ATUIN_NOBIND="true"
-    eval "$(atuin init bash)"
+    eval "$(atuin init auto)"
     atuin-bind '\C-a' atuin-search
 fi
 
@@ -164,3 +165,7 @@ export CHROME_EXECUTABLE=/usr/bin/chromium
 alias ssh='TERM=xterm-256color ssh'
 
 complete -C /usr/bin/terraform terraform
+
+if command -v starship &>/dev/null; then 
+    eval "$(starship init bash)"
+fi

@@ -56,18 +56,13 @@ layout {
         proportion 0.66667
     }
 
-    // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
-    // preset-window-heights { }
     default-column-width { proportion 0.5; }
-    // default-column-width {}
 
     focus-ring {
         off
         width 2
         active-color "#11ccff"
         inactive-color "#505050"
-        // active-gradient from="#80c8ff" to="#c7ff7f" angle=45
-        // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
     border {
@@ -80,7 +75,6 @@ layout {
 
     shadow {
         on
-        // draw-behind-window true
         softness 2
         spread 2
         offset x=0 y=2
@@ -88,10 +82,6 @@ layout {
     }
 
     struts {
-         // left 10
-         // right 10
-         // top 10
-         // bottom 10
     }
 }
 
@@ -103,24 +93,10 @@ hotkey-overlay {
     skip-at-startup
 }
 
-// Uncomment this line to ask the clients to omit their client-side decorations if possible.
-// If the client will specifically ask for CSD, the request will be honored.
-// Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
-// This option will also fix border/focus ring drawing behind some semitransparent windows.
-// After enabling or disabling this, you need to restart the apps for this to take effect.
 prefer-no-csd
 
-// You can change the path where screenshots are saved.
-// A ~ at the front will be expanded to the home directory.
-// The path is formatted with strftime(3) to give you the screenshot date and time.
 screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
-// You can also set this to null to disable saving screenshots to disk.
-// screenshot-path null
-
-// Animation settings.
-// The wiki explains how to configure individual animations:
-// https://yalter.github.io/niri/Configuration:-Animations
 animations {
     on
     workspace-switch {
@@ -239,7 +215,6 @@ xwayland-satellite {
     path "xwayland-satellite"
 }
 
-// autostart 
 spawn-sh-at-startup "~/.config/scripts/swaykill start"
 spawn-sh-at-startup "mpd-mpris"
 

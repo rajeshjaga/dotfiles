@@ -1,0 +1,60 @@
+theme = TokyoNight
+font-family = JetBrainsMono Nerd Font
+font-size=14
+# programming ligatures
+font-feature = +liga
+font-feature = +calt
+font-feature = +dlig
+ 
+# fallback fonts for better unicode
+font-family = Noto Color Emoji
+font-family = Noto Sans CJK JP
+
+background-opacity = .8
+background-blur = 10
+minimum-contrast = 1.5
+gtk-single-instance = desktop
+scrollback-limit = 100000000
+scrollbar = system 
+scrollbar = never
+
+shell-integration = detect
+shell-integration-features = cursor,sudo,title
+
+window-padding-x = 16
+window-padding-y = 16
+window-padding-balance = true
+window-padding-color = background
+
+keybind = ctrl+shift+up=jump_to_prompt:-1
+keybind = ctrl+shift+down=jump_to_prompt:1
+
+keybind = ctrl+shift+z=toggle_split_zoom
+keybind = ctrl+shift+equal=equalize_splits
+
+keybind = ctrl+0=reset_font_size
+
+# tab creation/navigation
+keybind = ctrl+shift+t=new_tab
+keybind = ctrl+tab=next_tab
+keybind = ctrl+shift+tab=previous_tab
+
+# Note: Ctrl+1-9 bindings removed to preserve standard terminal behavior
+# Use Ctrl+Tab/Ctrl+Shift+Tab for tab navigation instead
+
+# tab movement
+keybind = ctrl+shift+alt+left=move_tab:-1
+keybind = ctrl+shift+alt+right=move_tab:1
+
+keybind = ctrl+shift+h=goto_split:left
+keybind = ctrl+shift+j=goto_split:bottom
+keybind = ctrl+shift+l=goto_split:right
+
+# clipboard protection
+clipboard-read = ask
+clipboard-write = allow
+clipboard-paste-protection = true
+copy-on-select = true
+
+# prevent title query attacks
+title-report = false

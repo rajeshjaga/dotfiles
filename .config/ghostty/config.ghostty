@@ -21,7 +21,9 @@ scrollbar = never
 shell-integration = detect
 shell-integration-features = cursor,sudo,title
 
+window-show-tab-bar=false
 window-padding-x = 16
+gtk-wide-tabs=true
 window-padding-y = 16
 window-padding-balance = true
 window-padding-color = background

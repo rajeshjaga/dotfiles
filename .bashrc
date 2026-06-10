@@ -82,9 +82,10 @@ alias vscode='/usr/bin/code'
 alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 144 --right-of eDP-1"
-alias obi-sync="rclone sync $HOME/obsidian/test/ obsidian:test --progress"
+alias obi-sync="rclone sync $HOME/Obsidian/ obsidian:test --progress"
 alias econf="nvim ~/dotfiles/.config/"
-
+alias gc="git clone"
+alias gc1="git clone --depth=1"
 
 function gcl(){
     local repo=$1

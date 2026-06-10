@@ -9,10 +9,12 @@ element-text, element-icon , mode-switcher {
     background-color: inherit;
     text-color:       inherit;
 }
-
 window {
     height: 50%;
     width: 30%;
+    border: 2px solid;
+    border-radius: 10px;
+    border-color: @selected-urgent-background;
 }
 
 #mainbox {
@@ -20,15 +22,12 @@ window {
 
 #inputbar {
     children: [prompt,entry];
-    padding: 2px;
-    border:  3px;
-    border-radius:10px;
+    padding: 5px;
     margin: 10px 0px 0px 5px;
 }
 
 #prompt {
     padding: 6px;
-    border-radius: 3px;
 }
 
 textbox-prompt-colon {

@@ -1,7 +1,7 @@
 sort=-time
 max-history=500
 layer=overlay
-background-color=#190a1989
+background-color=#190a19ff
 width=400
 height=210
 padding= 5,5,10

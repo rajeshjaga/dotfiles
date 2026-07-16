@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+set -e
+message=$(rofi -dmenu -p "reminder message")
+timer="10sec|15sec|20sec|30sec|45sec|1min|2min|5min|10min|15min|30min|45min|1hr|2hr|3hr|6hr|12hr"
+message_timer=$(echo $timer | rofi -dmenu -sep "|" -p "when to remind you")
+num=$(echo $message_timer | sed 's/^\[a-z]*//')
+unit=$(echo $message_timer | sed 's/^\[0-9]*//')
+
+record_reminder(){
+    echo "${message} ${message_timer}" | tee -a $HOME/.remind
+}
+
+timer_check(){
+    local time_multiplier=$num
+    if [ $unit == "min" ]; then
+        record_reminder $time_multiplier*60
+    elif [ $unit == "hr" ]; then
+        record_reminder $time_multiplier*360
+    elif [ $unit == "sec" ]; then
+        record_reminder $time_multiplier
+    else
+        notify-send "something went wrong"
+    fi
+}

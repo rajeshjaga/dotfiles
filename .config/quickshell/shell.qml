@@ -1,6 +1,5 @@
 import Quickshell
 import QtQuick.Layouts
-import QtQuick.Systray
 import Quickshell.Io
 import QtQuick
 

@@ -1,0 +1,4 @@
+// Autostart Applications
+spawn-sh-at-startup "~/.config/scripts/swaykill start"
+spawn-sh-at-startup "mpd-mpris"
+spawn-sh-at-startup "wl-paste --watch cliphist store"

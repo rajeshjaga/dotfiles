@@ -1,0 +1,57 @@
+// Feeling of the NIRI
+window-rule {
+    background-effect {
+    }
+}
+
+animations {
+    on
+    workspace-switch {
+        spring damping-ratio=0.6 stiffness=750 epsilon=0.0002
+    }
+
+    window-open {
+        duration-ms 50
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 50
+        curve "ease-out-quad"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.5 stiffness=1000 epsilon=0.001
+    }
+
+    exit-confirmation-open-close {
+        spring damping-ratio=0.5 stiffness=500 epsilon=0.01
+    }
+
+    screenshot-ui-open {
+        duration-ms 250
+        curve "ease-out-quad"
+    }
+
+    overview-open-close {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.0001
+    }
+
+    recent-windows-close {
+        spring damping-ratio=0.7 stiffness=800 epsilon=0.001
+    }
+    slowdown 0.8
+}
+

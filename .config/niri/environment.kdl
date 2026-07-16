@@ -1,0 +1,17 @@
+// Very Important Stuff
+environment {
+    QT_QPA_PLATFORM "wayland"
+    DISPLAY ":1"
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+
+xwayland-satellite {
+    path "xwayland-satellite"
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"

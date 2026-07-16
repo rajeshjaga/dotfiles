@@ -131,11 +131,6 @@ export PATH=$PATH:$HOME/dotfiles/.config/scripts
 export EDITOR=nvim
 export TERMINAL=kitty
 
-# setting keyboard rate only for x11 session
-if [ ! $(echo $XDG_SESSION_TYPE) == "wayland" ]; then
-    xset r rate 250 35
-fi
-
 # init starship prompt, zoxide, autin if avilable
 if command -v zoxide &>/dev/null; then 
     eval "$(zoxide init bash)"
@@ -175,3 +170,4 @@ complete -C /usr/bin/terraform terraform
 if command -v starship &>/dev/null; then 
     eval "$(starship init bash)"
 fi
+export PATH="$HOME/.local/bin:$PATH"

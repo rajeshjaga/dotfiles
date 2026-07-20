@@ -5,26 +5,26 @@
 }
 
 window#waybar {
-    background-color: @background;
+    background-color: transparent;
     color: @foreground;
     transition-property: background-color;
     transition-duration: .5s;
 }
 
 button {
-    border: none;
-    border-radius: 0;
+    border: 1px solid @color8;
+    border-radius: 10px;
 }
 
 button:hover {
     background: inherit;
-    border-bottom: 2px solid @color15;
 }
 
 #workspaces button {
-    padding: 5px 6px;
+    padding: 5px 10px;
     color: @foreground;
     border-bottom: 2px solid @background;
+    margin: 0px 2px;
 }
 
 #workspaces button:hover {
@@ -32,8 +32,7 @@ button:hover {
 }
 
 #workspaces button.focused, #workspaces button.active {
-    border-bottom: 2px solid @color15;
-    background: @color8;
+    background: @color1;
 }
 
 #workspaces button.urgent {
@@ -45,22 +44,33 @@ button:hover {
 #pulseaudio,
 #battery
 #network,
+#custom-notification,
+#workspaces button,
+#window,
+#network,
+#mpris,
 #tray{
+    margin-top: 5px;
+    margin-bottom: 5px;
     padding: 5px 15px;
     color: @foreground;
-}
-
-#window,
-#workspaces {
-    margin: 0 4px;
-}
-
-.modules-left , .modules-right{
+    background-color: @background;
     border-radius: 10px;
+    border: 1px solid @color8;
 }
 
-.modules-left {
+/* #window */
+/* #workspaces { */
+/*     margin: 0 4px; */
+/* } */
+
+/* .modules-left , .modules-right{ */
+/*     border-radius: 10px; */
+/* } */
+
+.modules-left{
+    margin-left: 10px;
 }
 .modules-right {
-    margin-right: 5px;
+    margin-right: 10px;
 }

@@ -1,0 +1,16 @@
+configuration {
+	modes: "window,drun,run,ssh";
+	font: "JetBrainsMono NF 14";
+	location: 0;
+	sort: false;
+	case-sensitive: false;
+	cycle: true;
+  timeout {
+      action: "kb-cancel";
+      delay:  1000;
+  }
+  filebrowser {
+      directories-first: true;
+      sorting-method:    "name";
+  }
+}

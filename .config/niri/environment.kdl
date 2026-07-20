@@ -1,0 +1,19 @@
+// Very Important Stuff
+environment {
+    QT_QPA_PLATFORM "wayland"
+    DISPLAY ":1"
+    XDG_DATA_DIRS "/home/jraj/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share"
+    XDG_CONFIG_DIRS "/etc/xdg"
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+
+xwayland-satellite {
+    path "xwayland-satellite"
+}
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"

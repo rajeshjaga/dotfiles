@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if [ -f $HOME/Downloads ]; then
+  ls -la $HOME/Downloads
+fi

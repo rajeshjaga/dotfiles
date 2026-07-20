@@ -1,0 +1,39 @@
+workspace "browser" {
+    open-on-output "eDP-1"
+    layout{
+        gaps 5
+        border{
+            off
+        }
+        focus-ring{
+            on
+            active-color "yellow"
+            width 2
+        }
+    }
+}
+
+workspace "gaming" {
+    open-on-output "HDMI-A-1"
+    layout{
+        gaps 0
+        border{
+            off
+        }
+        shadow{
+            off
+        }
+        focus-ring{
+            off
+        }
+    }
+}
+
+workspace "terminal" {
+    open-on-output "HDMI-A-1"
+    layout{
+        border{
+        }
+    }
+}
+

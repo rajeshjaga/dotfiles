@@ -1,0 +1,122 @@
+window-rule {
+    match app-id=r#"zen$"#
+    default-column-width { proportion 1.0; }
+    open-maximized true
+    open-on-output "HDMI-A-1"
+}
+
+window-rule {
+    match is-window-cast-target=true
+
+    focus-ring {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+
+    border {
+        inactive-color "#7d0d2d"
+    }
+
+    shadow {
+        color "#7d0d2d70"
+    }
+
+    tab-indicator {
+        active-color "#f38ba8"
+        inactive-color "#7d0d2d"
+    }
+}
+
+window-rule {
+    match app-id=r#"zen$"# title="^Picture-in-Picture$"
+    open-floating true
+    default-floating-position x=10 y=15 relative-to="bottom-right"
+    block-out-from "screencast"
+    border {
+        off
+    }
+    shadow{
+        off
+    }
+    geometry-corner-radius 10
+    clip-to-geometry true
+}
+
+layer-rule{
+    match namespace="^rofi$"
+    background-effect{
+        blur true
+    }
+}
+
+window-rule{
+    match app-id=r#"^thunar"#
+    match app-id=r#"^nemo"#
+    match app-id=r#"^dolphin"#
+    opacity 0.9
+    open-floating true
+    default-floating-position x=0 y=0 relative-to="bottom-right"
+    border{
+    }
+    focus-ring{
+    }
+    shadow{
+    }
+    background-effect{
+        blur true
+        xray true
+        noise 0.1
+        saturation 2
+    }
+}
+
+window-rule {
+    match app-id=r#"^net.lutris.Lutris"#
+    match app-id=r#"org\.prismlauncher\.PrismLauncher"#
+    open-on-workspace "gaming"
+    default-column-width { proportion 1.0; }
+}
+
+window-rule {
+    match app-id=r#"^Minecraft\W"#
+    open-fullscreen true
+    open-on-workspace "gaming"
+    border{
+        off
+    }
+    focus-ring{
+        off
+    }
+}
+
+window-rule{
+    match app-id=r#"kitty$"#
+    match app-id=r#"^Alacritty$"#
+    default-column-width { proportion 1.0; }
+    opacity 1.0
+    background-effect {
+        blur true
+        xray true
+        noise 0.1
+        saturation 2
+    }
+}
+window-rule{
+    match  app-id=r#"zen$"#
+    match  app-id=r#"firefox$"#
+    match  app-id=r#"chromium$"#
+    match  app-id=r#"helium$"#
+    open-on-workspace "browser"
+    default-column-width{ proportion 1.0;}
+}
+
+window-rule {
+    match app-id=r#"^org\.keepassxc\.KeePassXC$"#
+    match app-id=r#"^org\.gnome\.World\.Secrets$"#
+    block-out-from "screen-capture"
+}
+
+window-rule {
+    geometry-corner-radius 5
+    clip-to-geometry true
+}

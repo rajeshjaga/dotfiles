@@ -52,7 +52,10 @@ alias mkdir='mkdir -p'
 alias home='cd ~'
 alias cd..='cd ..'
 alias ..='cd ..'
+alias sudr="systemctl --user daemon-reload"
+alias daemon-reload="systemctl --user daemon-reload"
 alias rmd='/bin/rm  --recursive --force --verbose '
+alias tree="eza --tree"
 alias lf="ls -l | egrep -v '^d'"  # files only
 alias ldir="ls -l | egrep '^d'"   # directories only
 alias labc='ls -lap'              # alphabetical sort
@@ -62,8 +65,10 @@ alias lk='ls -lSrh'               # sort by size
 alias lc='ls -ltcrh'              # sort by change time
 alias lu='ls -lturh'              # sort by access time
 alias lg='lazygit'
-alias ls='exa --icons'
-alias ll='exa -lah --icons'
+alias ls='exa --icons --color=auto'
+alias ll='exa -lah --icons --color=auto'
+alias ed='emacsclient -nw -a'
+alias bashrc='nvim ~/.bashrc'
 alias rm='rm -i'
 alias t='tmux'
 alias g='git'
@@ -77,9 +82,10 @@ alias vscode='/usr/bin/code'
 alias hrun="history | fzf | cut -d ' ' -f 5- | xargs echo"
 alias update-grub="sudo grub-mkconfig -o /boot/grub/grub.cfg"
 alias secmon="xrandr --output HDMI-1-0 --mode 1920x1080 --refresh 144 --right-of eDP-1"
-alias obi-sync="rclone sync $HOME/obsidian/test/ obsidian:test --progress"
+alias obi-sync="rclone sync $HOME/Obsidian/ obsidian:test --progress"
 alias econf="nvim ~/dotfiles/.config/"
-
+alias gc="git clone"
+alias gc1="git clone --depth=1"
 
 function gcl(){
     local repo=$1
@@ -109,7 +115,7 @@ function mkcd(){
 export PS1='\u@\h \W \$ '
 
 # fastfetch only if available
-[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch -c examples/17
+[[ ! -z $(which fastfetch 2>/dev/null) ]] && fastfetch 
 #
 # If arch linux then have reflector on
 if [ ! -z $(which pacman  2>/dev/null) ]; then
@@ -125,17 +131,13 @@ export PATH=$PATH:$HOME/dotfiles/.config/scripts
 export EDITOR=nvim
 export TERMINAL=kitty
 
-# setting keyboard rate only for x11 session
-if [ ! $(echo $XDG_SESSION_TYPE) == "wayland" ]; then
-    xset r rate 250 35
-fi
-
 # init starship prompt, zoxide, autin if avilable
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-if [ ! $( which autuin 2>/dev/null ) ]; then
+if command -v zoxide &>/dev/null; then 
+    eval "$(zoxide init bash)"
+fi
+if command -v autuin &>/dev/null; then
     export ATUIN_NOBIND="true"
-    eval "$(atuin init bash)"
+    eval "$(atuin init auto)"
     atuin-bind '\C-a' atuin-search
 fi
 
@@ -161,3 +163,11 @@ if [ -d $HOME/.local/bin/adb_android/ ]; then
 fi
 
 export CHROME_EXECUTABLE=/usr/bin/chromium
+alias ssh='TERM=xterm-256color ssh'
+
+complete -C /usr/bin/terraform terraform
+
+if command -v starship &>/dev/null; then 
+    eval "$(starship init bash)"
+fi
+export PATH="$HOME/.local/bin:$PATH"

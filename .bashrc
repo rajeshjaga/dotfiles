@@ -65,8 +65,8 @@ alias lk='ls -lSrh'               # sort by size
 alias lc='ls -ltcrh'              # sort by change time
 alias lu='ls -lturh'              # sort by access time
 alias lg='lazygit'
-alias ls='exa --icons'
-alias ll='exa -lah --icons'
+alias ls='exa --icons --color=auto'
+alias ll='exa -lah --icons --color=auto'
 alias ed='emacsclient -nw -a'
 alias bashrc='nvim ~/.bashrc'
 alias rm='rm -i'

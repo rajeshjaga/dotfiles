@@ -1,27 +1,17 @@
 # Dotfiles
 ----
+![ScreenShot](./.assets/ss.png)
 This is the config folder for my linux machine for window manager and more tools:
-- awesomewm
-- hyprland
 - niri
-- i3wm 
-- polybar
 - waybar
 - alacritty
 - kitty
-- dunst
 - fastfetch
 - bashrc
 - zsh config
 - htop
-- picom - blur and transparent
-- qtile - intital config
 - ranger
-- sway
-- wofi
-- xmoand
-- xmobar
-- sxwm
+- swaync
 - tmux
     ```bash
     Ctrl+S #modifier
@@ -30,7 +20,7 @@ This is the config folder for my linux machine for window manager and more tools
 ```bash
 git clone https://github.com/rajeshjaga/dotfiles ~/dotfiles/
 cd ~/dotfiles
-git checkout latest-2026
+git checkout master
 stow . --ignore=README.md # dont use adopt just delete the conflict files
 ```
 
